@@ -1,0 +1,13 @@
+{
+  "name": "web-shared-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/web/_shared/ui/src",
+  "prefix": "web-shared-ui",
+  "projectType": "library",
+  "tags": ["shared"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

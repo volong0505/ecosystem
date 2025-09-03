@@ -1,0 +1,40 @@
+.form-container {
+    margin-left: 1em;
+}
+
+.select-left {
+  padding-right: .5em;
+}
+
+.select-right {
+  padding-left: .5em;
+}
+
+.sentence-input {
+    margin-bottom: 1em;
+}
+
+button {
+    margin-top: 1em;
+    width: 100%;
+}
+
+.sentence-element-delete {
+    float: right;
+}
+
+.editable-tag {
+    background: rgb(255, 255, 255);
+    border-style: dashed;
+    cursor: pointer
+}
+
+.sentence-container {
+    margin-top: 2em;
+}
+
+.sentence-element {
+    padding-left: .5em;
+    padding-bottom: .5em;
+}
+

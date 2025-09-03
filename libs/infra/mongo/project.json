@@ -1,0 +1,9 @@
+{
+  "name": "infra-mongo",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/infra/mongo/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project infra-mongo --web",
+  "targets": {}
+}

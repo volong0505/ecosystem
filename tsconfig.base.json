@@ -1,8 +1,5 @@
 {
   "compilerOptions": {
-    "composite": true,
-    "declarationMap": true,
-    "emitDeclarationOnly": true,
     "importHelpers": true,
     "isolatedModules": true,
     "lib": ["es2022"],
@@ -16,6 +13,25 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    "customConditions": ["development"]
+    "customConditions": ["development"],
+    "baseUrl": ".",
+    "paths": {
+      "@ecosystem/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@ecosystem/data-access-event": [
+        "libs/web/data-access/event/src/index.ts"
+      ],
+      "@ecosystem/data-access-word": ["libs/web/data-access/word/src/index.ts"],
+      "@ecosystem/infra-database": ["libs/database/src/index.ts"],
+      "@ecosystem/infra-mongo": ["libs/infra/mongo/src/index.ts"],
+      "@ecosystem/web-calendar-feature": [
+        "libs/web/features/calendar/src/index.ts"
+      ],
+      "@ecosystem/web-shared-ui": ["libs/web/_shared/ui/src/index.ts"],
+      "@ecosystem/web-shell-feature": ["libs/web/features/shell/src/index.ts"],
+      "@ecosystem/web-utils": ["libs/web/utils/src/index.ts"],
+      "@ecosystem/web-vocabulary-tracker-feature": [
+        "libs/web/features/vocabulary-tracker/src/index.ts"
+      ]
+    }
   }
 }

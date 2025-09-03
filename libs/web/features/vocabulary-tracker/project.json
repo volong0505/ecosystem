@@ -1,0 +1,13 @@
+{
+  "name": "web-vocabulary-tracker-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/web/features/vocabulary-tracker/src",
+  "prefix": "web-vocabulary-tracker",
+  "projectType": "library",
+  "tags": ["feature"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}
