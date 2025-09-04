@@ -3,7 +3,6 @@ import { API_ROUTES, CreateWordRequest, CreateWordResponse, FindWordRequest, Fin
 import { WordService } from "./word.service";
 
 const routers = API_ROUTES.WORD;
-
 @Controller()
 export class WordController {
      constructor(
@@ -30,9 +29,7 @@ export class WordController {
     @Get(routers.FIND_ALL)
     async getVocabularyList(@Query() req: FindWordsRequest): Promise<FindWordsResponse> {
         const obj = JSON.parse(JSON.stringify(req)); // req.body = [Object: null prototype] { title: 'product' }
-        console.log(obj)
         const {data, total} = await this.service.findAll(obj);
-
         // Return the vocabulary list
         return {
             data,
@@ -49,6 +46,5 @@ export class WordController {
     createVocabulary(@Body() body: CreateWordRequest): Promise<CreateWordResponse> {
         // Call the service to create a new vocabulary entry
         return this.service.create(body);
-
     }
 }

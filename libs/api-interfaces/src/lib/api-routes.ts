@@ -14,5 +14,6 @@ export const API_ROUTES = {
         UPDATE: 'word/update',
         DELETE: 'word/delete',   
         GENERATE_BY_AI: 'word/generate-by-ai',
+        FLASHCARD: 'word/flashcard',
     }
 }

@@ -21,16 +21,19 @@ import { CommonModule } from '@angular/common';
   styleUrl: './layout-component.css',
 })
 export class LayoutComponent {
-    sidebarItem = [
+  sidebarItem = [
     {
-        label: 'Calendar', path: 'calendar', icon: 'calendar', exact: true, hidden: false
-      },
-     {
-        label: 'Language', path: 'vocabulary-tracker', icon: 'translation', exact: true, hidden: false,
+      label: 'Calendar', path: 'calendar', icon: 'calendar', exact: true, hidden: false
+    },
+    {
+      label: 'Language', path: 'vocabulary-tracker', icon: 'translation', exact: true, hidden: false,
+    },
+    {
+      label: 'Flashcard', path: 'flashcard', icon: 'book', exact: true, hidden: false,
     }
-]
+  ]
 
- isCollapsed = true;
+  isCollapsed = true;
 
   toggleCollapsed(): void {
     this.isCollapsed = !this.isCollapsed;

@@ -26,6 +26,9 @@
       "@ecosystem/web-calendar-feature": [
         "libs/web/features/calendar/src/index.ts"
       ],
+      "@ecosystem/web-flashcard-feature": [
+        "libs/web/features/flashcard/src/index.ts"
+      ],
       "@ecosystem/web-shared-ui": ["libs/web/_shared/ui/src/index.ts"],
       "@ecosystem/web-shell-feature": ["libs/web/features/shell/src/index.ts"],
       "@ecosystem/web-utils": ["libs/web/utils/src/index.ts"],

@@ -92,5 +92,26 @@ export class WordService {
             } : {}
         }
     }
+
+    async flashcard(params: { learned_word_id?: string }) {
+        if (params.learned_word_id) {
+            await this.repository.updateReviewedAt(params.learned_word_id!);
+        }
+        const word = await this.repository.getWordToReview();
+        return {
+            data: word ? {
+                id: word._id.toString(),
+                word: word.word,
+                translation: word.translation,
+                meaning: word.meaning,
+                ipa: word.ipa,
+                pronunciation: word.pronunciation,
+                level: word.level,
+                partsOfSpeech: word.partsOfSpeech,
+                tags: word.tags,
+                examples: word.examples || [],
+            } : {}
+        }
+    }
 }
 

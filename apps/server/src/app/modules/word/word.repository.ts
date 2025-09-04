@@ -71,4 +71,13 @@ export class WordRepository {
   async deleteById(id: string): Promise<void> {
     await this.model.findByIdAndDelete(id).exec();
   }
+
+  async updateReviewedAt(id: string): Promise<Word | null> {
+    const reviewedAt = new Date();
+    return this.model.findByIdAndUpdate(id, { reviewedAt }).exec();
+  }
+
+  async getWordToReview(): Promise<Word> {
+    return this.model.find().sort({ reviewedAt: 1 }).limit(1).exec().then(words => words[0]);
+  }
 }
