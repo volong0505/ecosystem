@@ -1,7 +1,7 @@
 import { WordSentence } from "./word.dto";
 
 export class FlashcardRequest {
-    learned_word_id?: string;
+    id?: string;
 }
 
 export class FlashcardDto {

@@ -1,0 +1,13 @@
+{
+  "name": "web-language-learning-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/web/features/langluage-learning/src",
+  "prefix": "web-language-learning",
+  "projectType": "library",
+  "tags": ["feature"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

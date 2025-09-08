@@ -1,0 +1,83 @@
+nz-card {
+  width: 700px;
+  height: 400px;
+  margin: auto;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 12px 32px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.card-header {
+  display: inline-flex;
+  margin-bottom: 4px;
+}
+
+.word {
+  color: rgba(0, 0, 0, 0.88);
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.tags {
+  padding-top: 5px;
+  padding-left: 1em;
+}
+
+.check-button {
+  right: 0;
+  position: absolute;
+  padding-right: 2em;
+}
+
+[nz-button] {
+  margin-right: 8px;
+  margin-bottom: 12px;
+}
+
+.meaning {
+  padding-top: 1em;
+  font-size: 15px;
+  font-style: italic;
+}
+
+input {
+  margin-top: 1em;
+  border-radius: 12px
+}
+
+.sentences {
+  padding-top: 2em;
+}
+
+.sentences-title {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.sentence {
+  padding-left: .5em;
+  font-size: 15px;
+  margin-top: 0.5em;
+  font-style: italic;
+
+}
+
+.card-footer {
+  /* stick footer to bottom-right */
+
+}
+
+.hint {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0 0 1em 1em;
+}
+
+
+.memorized {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 0 1em 1em 0;
+}

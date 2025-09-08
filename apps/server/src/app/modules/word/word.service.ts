@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { GeminiService } from "../gemeni/gemini.service";
-import { CreateWordRequest, CreateWordResponse, FindWordsRequest, FindWordsResponse, FindWordRequest, FindWordResponse, WordsItem } from "@ecosystem/api-interfaces";
+import { CreateWordRequest, CreateWordResponse, FindWordsRequest, FindWordsResponse, FindWordRequest, FindWordResponse, WordsItem, FlashcardRequest, FlashcardResponse, FlashcardDto } from "@ecosystem/api-interfaces";
 import { WordRepository } from "./word.repository";
 
 @Injectable()
@@ -93,9 +93,9 @@ export class WordService {
         }
     }
 
-    async flashcard(params: { learned_word_id?: string }) {
-        if (params.learned_word_id) {
-            await this.repository.updateReviewedAt(params.learned_word_id!);
+    async flashcard(params: FlashcardRequest): Promise<FlashcardResponse> {
+        if (params.id) {
+            await this.repository.updateReviewedAt(params.id!);
         }
         const word = await this.repository.getWordToReview();
         return {
@@ -110,7 +110,7 @@ export class WordService {
                 partsOfSpeech: word.partsOfSpeech,
                 tags: word.tags,
                 examples: word.examples || [],
-            } : {}
+            } : {} as FlashcardDto
         }
     }
 }

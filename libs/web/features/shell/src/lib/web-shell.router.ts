@@ -14,13 +14,9 @@ export const webShellRoutes: Route[] = [
                 loadComponent: () => import('@ecosystem/web-calendar-feature').then(c => c.WebCalendarFeature)
             },
             {
-                path: 'vocabulary-tracker',
-                loadComponent: () => import('@ecosystem/web-vocabulary-tracker-feature').then(c => c.WebVocabularyTrackerFeature)
-            },
-            {
-                path: 'flashcard',
-                loadComponent: () => import('@ecosystem/web-flashcard-feature').then(c => c.WebFlashcardFeature)
-            },
+                path: 'language-learning',
+                loadComponent: () => import('@ecosystem/web-language-learning-feature').then(c => c.WebLanguageLearningFeature)
+            }
         ]
     }
 ]

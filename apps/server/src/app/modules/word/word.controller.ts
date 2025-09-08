@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Query, ServiceUnavailableException } from "@nestjs/common";
-import { API_ROUTES, CreateWordRequest, CreateWordResponse, FindWordRequest, FindWordResponse, FindWordsRequest, FindWordsResponse } from "@ecosystem/api-interfaces";
+import { API_ROUTES, CreateWordRequest, CreateWordResponse, FindWordRequest, FindWordResponse, FindWordsRequest, FindWordsResponse, FlashcardRequest, FlashcardResponse } from "@ecosystem/api-interfaces";
 import { WordService } from "./word.service";
 
 const routers = API_ROUTES.WORD;
@@ -46,5 +46,10 @@ export class WordController {
     createVocabulary(@Body() body: CreateWordRequest): Promise<CreateWordResponse> {
         // Call the service to create a new vocabulary entry
         return this.service.create(body);
+    }
+
+    @Get(routers.FLASHCARD)
+    flashcardOfTheDay(@Query() req: FlashcardRequest): Promise<FlashcardResponse> {
+        return this.service.flashcard(req);
     }
 }

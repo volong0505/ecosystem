@@ -57,7 +57,7 @@ export class Word {
   creationDate?: Date;
 
   @Prop()
-  latestReviewDate?: Date;
+  reviewedAt?: Date;
 }
 
 export const WordSchema = SchemaFactory.createForClass(Word);

@@ -74,10 +74,11 @@ export class WordRepository {
 
   async updateReviewedAt(id: string): Promise<Word | null> {
     const reviewedAt = new Date();
-    return this.model.findByIdAndUpdate(id, { reviewedAt }).exec();
+    console.log(new Types.ObjectId(id))
+    return await this.model.findByIdAndUpdate(new Types.ObjectId(id), { reviewedAt }).exec();
   }
 
   async getWordToReview(): Promise<Word> {
-    return this.model.find().sort({ reviewedAt: 1 }).limit(1).exec().then(words => words[0]);
+    return await this.model.find().sort({ reviewedAt: 1 }).limit(1).exec().then(words => words[0]);
   }
 }
