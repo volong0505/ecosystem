@@ -43,6 +43,7 @@ export class Events {
 
     @Prop()
     deleteAt!: Date;
+    
 
 }
 

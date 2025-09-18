@@ -17,13 +17,16 @@ Dựa trên từ vựng mà tôi yêu cầu, bạn hãy trả về **duy nhất 
             "sentence": string,
             "pronunciation": string,
             "meaning": string,
-      }[]
+    }[],
+    related_words: string[]
   }
 
 - Lưu ý:
+ + word: trả về dạng nguyên mẫu, ví dụ: Opinions -> Opinion
  + ipa: sử dụng US IPA
  + pronunciation: sử dụng phát âm American pronunciation.
  + tags: là một mảng các từ khóa liên quan đến từ vựng này, ví dụ: ["Environment", "Gardening"],    
+ + related_words: là một mảng các từ ở dạng: V2, V3, các biến thể Parts Of Speech nếu có
   Ví dụ:
   - Từ "Greenhouse"
   - JSON: 
@@ -48,6 +51,7 @@ Dựa trên từ vựng mà tôi yêu cầu, bạn hãy trả về **duy nhất 
             "pronunciation": "Thờ grin-hào-s i-fẹk is ko-zing glâu-bồ them-pờ-rờ-chờs tu rai-z",
             "meaning": "Hiệu ứng nhà kính đang khiến nhiệt độ toàn cầu tăng lên."
         }
-    ]
+    ],
+    "related_words": []
 }
 Từ: `

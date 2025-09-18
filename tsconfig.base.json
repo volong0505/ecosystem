@@ -20,6 +20,9 @@
       "@ecosystem/data-access-event": [
         "libs/web/data-access/event/src/index.ts"
       ],
+      "@ecosystem/data-access-flashcard": [
+        "libs/web/data-access/flashcard/src/index.ts"
+      ],
       "@ecosystem/data-access-word": ["libs/web/data-access/word/src/index.ts"],
       "@ecosystem/infra-database": ["libs/database/src/index.ts"],
       "@ecosystem/infra-mongo": ["libs/infra/mongo/src/index.ts"],

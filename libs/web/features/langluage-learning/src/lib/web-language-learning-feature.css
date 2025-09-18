@@ -1,6 +1,6 @@
 .container {
-  background-color: #fff;
-  border-radius: 8px;
+  background-color: rgba(32, 32, 32, 0.9);
+  border-radius: 12px;
   padding: 10px;
   min-height: 80vh;
 }

@@ -11,3 +11,5 @@ npx nx g @nx/angular:component libs/web/features/vocabulary-tracker/src/lib/voca
 npx nx g @nx/angular:component libs/web/features/vocabulary-tracker/src/lib/vocabulary-tracker-drawer/vocabulary-tracker-drawer-component --prefix=vocabulary-tracker-drawer --name=vocabulary-tracker-drawer-component --export
 
 npx nx g @nx/angular:component libs/web/features/flashcard/src/lib/flashcard-card/flashcard-card-component --prefix=flashcard-card --name=flashcard-card-component --export
+npx nx g @nx/angular:component libs/web/features/flashcard/src/lib/flashcard-card-study/flashcard-card-study-component --prefix=flashcard-card-study --name=flashcard-card-study-component --export
+npx nx g @nx/angular:component libs/web/features/flashcard/src/lib/flashcard-card-review/flashcard-card-review-component --prefix=flashcard-card-review --name=flashcard-card-review-component --export

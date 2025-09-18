@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
-import { API_ROUTES, CreateWordRequest, CreateWordResponse, FindWordResponse, FindWordsRequest, FindWordsResponse, FlashcardResponse } from "@ecosystem/api-interfaces";
+import { API_ROUTES, CreateWordRequest, CreateWordResponse, FindWordResponse, FindWordsRequest, FindWordsResponse } from "@ecosystem/api-interfaces";
 import { Observable } from "rxjs";
 
 const apiRoutes = API_ROUTES.WORD;
@@ -37,9 +37,5 @@ export class DataAccessWordService {
         // Logic to add a new word to the vocabulary list
     }
 
-    flashcardOfTheDay(id: string | null): Observable<FlashcardResponse> {
-        const params = new HttpParams()
-            .set('id', id || '');
-        return this.http.get<FlashcardResponse>(apiRoutes.FLASHCARD, {params: params});
-    }
+   
 }

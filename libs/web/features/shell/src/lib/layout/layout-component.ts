@@ -6,6 +6,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 @Component({
   selector: 'shell-layout-component',
@@ -15,18 +16,22 @@ import { CommonModule } from '@angular/common';
     NzButtonModule,
     NzIconModule,
     NzMenuModule,
-    NzLayoutModule
+    NzLayoutModule,
+    NzTabsModule
   ],
   templateUrl: './layout-component.html',
   styleUrl: './layout-component.css',
 })
 export class LayoutComponent {
-  sidebarItem = [
+  tabs = [
     {
       label: 'Calendar', path: 'calendar', icon: 'calendar', exact: true, hidden: false
     },
     {
-      label: 'Language', path: 'language-learning', icon: 'translation', exact: true, hidden: false,
+      label: 'Vocabulary Tracker', path: 'vocabulary-tracker', icon: 'translation', exact: true, hidden: false,
+    },
+     {
+      label: 'Flashcards', path: 'flashcards', icon: 'translation', exact: true, hidden: false,
     },
   ]
 

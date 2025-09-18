@@ -11,6 +11,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
 interface WordSentenceExample extends WordSentence {
@@ -30,6 +31,7 @@ interface WordSentenceExample extends WordSentence {
     NzDividerModule,
     NzSpinModule,
     NzTagModule,
+    NzAlertModule,
 
     ReactiveFormsModule,
     FormsModule,
@@ -47,6 +49,10 @@ export class VocabularyTrackerDrawerComponent {
   tags: string[] = [];
   inputVisible = false;
   inputValue = '';
+  isExisted =  {
+    status: false
+  }
+
   @ViewChild('inputElement', { static: false }) inputElement?: ElementRef;
 
   examples: WordSentenceExample[] = [];
@@ -98,7 +104,6 @@ export class VocabularyTrackerDrawerComponent {
         meaning: sentence.meaning,
         pronunciation: sentence.pronunciation
       })) || [];
-
       this.tags = this.detail?.tags || [];
     });
   
@@ -172,6 +177,8 @@ export class VocabularyTrackerDrawerComponent {
         meaning: sentence.meaning,
         pronunciation: sentence.pronunciation
       }));
+
+      this.isExisted = data.isExisted,
 
       this.tags = data.tags || [];
       this.isSpinning = false;

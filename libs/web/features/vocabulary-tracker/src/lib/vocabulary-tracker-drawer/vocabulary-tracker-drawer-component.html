@@ -1,9 +1,5 @@
-<nz-drawer [nzClosable]="false"
-            nzWidth="500px"
-            nzPlacement="right"
-            [nzKeyboard]="true"
-            (nzOnClose)="store.closeDrawer()"
-         [nzVisible]="store.drawer.isOpen()">
+<nz-drawer [nzClosable]="false" nzWidth="500px" nzPlacement="left" [nzKeyboard]="true" (nzOnClose)="store.closeDrawer()"
+    [nzVisible]="store.drawer.isOpen()">
     <ng-container *nzDrawerContent>
         <div>
             <nz-spin nzTip="Asking..." [nzSpinning]="isSpinning">
@@ -19,67 +15,70 @@
             </nz-spin>
         </div>
 
+     
+
         <div>
             <div class="form-container">
-            <form  nz-form [formGroup]="validateForm" class="login-form">
-                <h5 nz-typography>Vocabulary</h5>
+                <form nz-form [formGroup]="validateForm" class="login-form">
+                    <h5 nz-typography>Vocabulary</h5>
 
-                <nz-form-item>
-                    <nz-form-control>
-                        <input type="text" nz-input formControlName="word" placeholder="Word"
-                            nzVariant="underlined" /> </nz-form-control>
-                </nz-form-item>
+                    <nz-form-item>
+                        <nz-form-control>
+                            <input type="text" nz-input formControlName="word" placeholder="Word"
+                                nzVariant="underlined" /> </nz-form-control>
+                    </nz-form-item>
 
-                <nz-form-item>
-                    <nz-form-control>
-                        <input type="text" nz-input formControlName="translation" placeholder="Translation"
-                            nzVariant="underlined" /> </nz-form-control>
-                </nz-form-item>
+                    <nz-form-item>
+                        <nz-form-control>
+                            <input type="text" nz-input formControlName="translation" placeholder="Translation"
+                                nzVariant="underlined" /> </nz-form-control>
+                    </nz-form-item>
 
-                <nz-form-item>
-                    <nz-form-control>
-                        <input type="text" nz-input formControlName="pronunciation" placeholder="Pronunciation"
-                            nzVariant="underlined" /> </nz-form-control>
-                </nz-form-item>
+                    <nz-form-item>
+                        <nz-form-control>
+                            <input type="text" nz-input formControlName="pronunciation" placeholder="Pronunciation"
+                                nzVariant="underlined" /> </nz-form-control>
+                    </nz-form-item>
 
-                <nz-form-item>
-                    <nz-form-control>
-                        <textarea formControlName="meaning" nz-input rows="1" placeholder="Meaning"
-                            nzVariant="underlined"></textarea>
-                    </nz-form-control>
-                </nz-form-item>
+                    <nz-form-item>
+                        <nz-form-control>
+                            <textarea formControlName="meaning" nz-input rows="1" placeholder="Meaning"
+                                nzVariant="underlined"></textarea>
+                        </nz-form-control>
+                    </nz-form-item>
 
-                <nz-form-item>
-                    <nz-form-control>
-                        <input type="text" nz-input formControlName="ipa" placeholder="IPA" nzVariant="underlined" />
-                    </nz-form-control>
-                </nz-form-item>
+                    <nz-form-item>
+                        <nz-form-control>
+                            <input type="text" nz-input formControlName="ipa" placeholder="IPA"
+                                nzVariant="underlined" />
+                        </nz-form-control>
+                    </nz-form-item>
 
-                <nz-form-item>
-                    <nz-form-control [nzSm]="12" [nzXs]="24">
-                        <nz-select class="select-left" formControlName="level" nzVariant="underlined"
-                            nzPlaceHolder="Level">
-                            <nz-option nzValue="A1" nzLabel="A1"></nz-option>
-                            <nz-option nzValue="A2" nzLabel="A2"></nz-option>
-                            <nz-option nzValue="B1" nzLabel="B1"></nz-option>
-                            <nz-option nzValue="B2" nzLabel="B2"></nz-option>
-                            <nz-option nzValue="C1" nzLabel="C1"></nz-option>
-                        </nz-select>
-                    </nz-form-control>
+                    <nz-form-item>
+                        <nz-form-control [nzSm]="12" [nzXs]="24">
+                            <nz-select class="select-left" formControlName="level" nzVariant="underlined"
+                                nzPlaceHolder="Level">
+                                <nz-option nzValue="A1" nzLabel="A1"></nz-option>
+                                <nz-option nzValue="A2" nzLabel="A2"></nz-option>
+                                <nz-option nzValue="B1" nzLabel="B1"></nz-option>
+                                <nz-option nzValue="B2" nzLabel="B2"></nz-option>
+                                <nz-option nzValue="C1" nzLabel="C1"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
 
-                    <nz-form-control [nzSm]="12" [nzXs]="24">
-                        <nz-select nzMode="tags" class="select-right" formControlName="partsOfSpeech" nzVariant="underlined"
-                            nzPlaceHolder="Parts of Speech">
-                            @for( part of partsOfSpeechOptions; track part.value) {
-                            <nz-option [nzValue]="part.value" [nzLabel]="part.label"></nz-option>
-                            }
+                        <nz-form-control [nzSm]="12" [nzXs]="24">
+                            <nz-select nzMode="tags" class="select-right" formControlName="partsOfSpeech"
+                                nzVariant="underlined" nzPlaceHolder="Parts of Speech">
+                                @for( part of partsOfSpeechOptions; track part.value) {
+                                <nz-option [nzValue]="part.value" [nzLabel]="part.label"></nz-option>
+                                }
 
-                        </nz-select> </nz-form-control>
-                </nz-form-item>
+                            </nz-select> </nz-form-control>
+                    </nz-form-item>
 
-            </form>
+                </form>
 
-            
+
                 @for (tag of tags; track tag) {
                 <nz-tag [nzMode]="$index === 0 ? 'default' : 'closeable'" (nzOnClose)="handleClose(tag)">
                     {{ sliceTagName(tag) }}
@@ -136,5 +135,12 @@
                 </button>
             </div>
         </div>
+
+    @if(isExisted.status) {
+        <div class="alert">
+            <nz-alert nzType="warning" nzMessage="This word already exists" nzShowIcon>
+            </nz-alert>
+        </div>
+        }
     </ng-container>
 </nz-drawer>

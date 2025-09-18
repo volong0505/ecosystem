@@ -58,6 +58,14 @@ export class Word {
 
   @Prop()
   reviewedAt?: Date;
+
+  // for flashcard
+  @Prop()
+  repetition!: number;
+
+  @Prop()
+  nextReviewDate!: Date;
+
 }
 
 export const WordSchema = SchemaFactory.createForClass(Word);

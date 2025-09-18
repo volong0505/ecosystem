@@ -2,6 +2,7 @@ import { WordSentence } from "./word.dto";
 
 export class FlashcardRequest {
     id?: string;
+    neededHelp?: boolean
 }
 
 export class FlashcardDto {
@@ -15,6 +16,7 @@ export class FlashcardDto {
     partsOfSpeech?: string[];
     tags?: string[];
     examples!: WordSentence[];
+    alreadyLearned!: boolean;
 }
 
 export class FlashcardResponse {

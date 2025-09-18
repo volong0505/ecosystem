@@ -1,24 +1,46 @@
 <div class="table-ctn">
-  <div nz-flex nzVertical="false" nzJustify="space-between" class="table-header">
-    <div class="flex-item">
+  <div class="table-header">
+    <div nz-row>
+      <div nz-col nzSpan="12">
+        <div nz-flex>
 
-      <form nz-form [formGroup]="searchForm" (ngSubmit)="submitForm()">
-        <nz-form-item>
-          <nz-form-control>
-            <nz-input-group [nzSuffix]="suffixIconSearch">
-              <input formControlName="keyword" type="text" nz-input placeholder="Search" />
-            </nz-input-group>
-            <ng-template #suffixIconSearch>
-              <nz-icon nzType="search" />
-            </ng-template>
-          </nz-form-control>
-        </nz-form-item>
-      </form>
+          <!-- create form -->
+          <div class="btn">
+            <shared-ui-button-component buttonText="+ New" (shareClicked)="store.openDrawer()" />
+          </div>
+
+          <!-- search form -->
+          <div>
+            <form nz-form [formGroup]="searchForm" (ngSubmit)="submitForm()">
+              <nz-form-item>
+                <nz-form-control>
+                  <nz-input-group [nzSuffix]="suffixIconSearch">
+                    <input formControlName="keyword" type="text" nz-input placeholder="Search" />
+                  </nz-input-group>
+                  <ng-template #suffixIconSearch>
+                    <nz-icon nzType="search" />
+                  </ng-template>
+                </nz-form-control>
+              </nz-form-item>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div nz-col nzSpan="12">
+        <!-- data statistical -->
+        <div class="statistical">
+          <span>
+            Total: {{store.list.total()}}
+          </span>
+        </div>
+      </div>
     </div>
-    <div class="flex-item ">
-      <shared-ui-button-component buttonText="New" (shareClicked)="store.openDrawer()" />
-    </div>
+
+
   </div>
+
+
 
   <nz-table [nzData]="store.list.data()" [nzShowPagination]="false" #nzTable nzTableLayout="fixed">
     <thead>
@@ -88,11 +110,7 @@
   </nz-table>
 
   <div class="pagin-ctn">
-      <nz-pagination
-      [nzPageIndex]="currentPage"
-      [nzTotal]="total"
-      [nzSize]="'small'"
-      (nzPageIndexChange)="pageChange($event)"
-    ></nz-pagination>
+    <nz-pagination [nzPageIndex]="currentPage" [nzTotal]="total" [nzSize]="'small'"
+      (nzPageIndexChange)="pageChange($event)"></nz-pagination>
   </div>
 </div>

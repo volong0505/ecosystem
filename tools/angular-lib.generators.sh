@@ -12,6 +12,7 @@ npx nx g @nx/angular:library libs/web/_shared/ui/ --name=web-shared-ui --tags=sh
 npx nx g @nx/angular:library libs/web/features/vocabulary-tracker/ --name=web-vocabulary-tracker-feature --tags=feature --skipModule --prefix=web-vocabulary-tracker --flat
 
 npx nx g @nx/angular:library libs/web/data-access/word/ --name=data-access-word --tags=data-access --skipModule --prefix=data-access-word --flat
+npx nx g @nx/angular:library libs/web/data-access/flashcard/ --name=data-access-flashcard --tags=data-access --skipModule --prefix=data-access-flashcard --flat
 
 npx nx g @nx/angular:library libs/web/features/langluage-learning/ --name=web-language-learning-feature --tags=feature --skipModule --prefix=web-language-learning --flat
 npx nx g @nx/angular:library libs/web/features/flashcard/ --name=web-flashcard-feature --tags=feature --skipModule --prefix=web-flashcard --flat

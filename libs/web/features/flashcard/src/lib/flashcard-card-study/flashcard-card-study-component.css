@@ -1,0 +1,47 @@
+
+nz-card {
+  background-color: rgb(255, 255, 255);
+  width: 700px;
+  height: 400px;
+  margin: auto;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 12px 32px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  border-radius: 12px;
+  position: relative;
+}
+.card-header {
+  display: inline-flex;
+  margin-bottom: 4px;
+}
+
+.word {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.tags {
+  padding-top: 5px;
+  padding-left: 1em;
+}
+
+.check-button {
+  right: 0;
+  position: absolute;
+  padding-right: 2em;
+}
+
+[nz-button] {
+  margin-right: 8px;
+  margin-bottom: 12px;
+}
+
+.meaning {
+  padding-top: 1em;
+  font-size: 15px;
+  font-style: italic;
+}
+
+.word {
+  text-align: center;
+  padding-top: 4em;
+
+}

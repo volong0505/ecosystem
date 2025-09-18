@@ -1,40 +1,39 @@
-
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DataAccessFlashcardStore } from '@ecosystem/data-access-word';
-import { TagComponent } from '@ecosystem/web-shared-ui';
-import { NzCardModule } from 'ng-zorro-antd/card';
+import { DataAccessFlashcardStore } from '@ecosystem/data-access-flashcard';
+import { ButtonComponent, TagComponent } from '@ecosystem/web-shared-ui';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzButtonModule } from 'ng-zorro-antd/button'
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { FlashcardRequest } from '@ecosystem/api-interfaces';
+
 @Component({
-  selector: 'flashcard-card-component',
+  selector: 'flashcard-card-review',
   imports: [
     CommonModule,
     FormsModule,
-    NzCardModule,
     NzDescriptionsModule,
     NzInputModule,
     NzIconModule,
     NzFlexModule,
-    NzButtonModule,
+    NzCardModule,
 
+    ButtonComponent,
     TagComponent
   ],
-  templateUrl: './flashcard-card-component.html',
-  styleUrl: './flashcard-card-component.css',
+  templateUrl: './flashcard-card-review-component.html',
+  styleUrl: './flashcard-card-review-component.css',
 })
-export class FlashcardCardComponent {
-
-   public readonly store = inject(DataAccessFlashcardStore);
+export class FlashcardCardReviewComponent {
+  public readonly store = inject(DataAccessFlashcardStore);
 
   value: string = '';
   status: 'error' | 'warning' | ''	= '';
   isCorrect = signal(false);
-
+  neededHelp: boolean = false;
   id: string | null = null;
 
 
@@ -51,6 +50,17 @@ export class FlashcardCardComponent {
     this.value = '';
     this.status = '';
     this.isCorrect.set(false);
-    this.store.loadFlashcardOfTheDay( this.store.flashcard.data().id || null);
+    const req: FlashcardRequest = {
+      id: this.store.flashcard().data.id,
+      neededHelp: this.neededHelp,
+    }
+    this.store.loadFlashcardOfTheDay(req);
+    this.neededHelp = false
+
+  }
+
+  hint() {
+    this.value = this.store.flashcard().data.word;
+    this.neededHelp = true
   }
 }

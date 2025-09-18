@@ -1,0 +1,39 @@
+<nz-card>
+
+    <div>
+        <div class="card-header">
+            <div>
+                <span class="word">{{store.flashcard().data.translation}}</span>
+            </div>
+
+            <div class="tags">
+                @for (tag of store.flashcard.data().partsOfSpeech; track tag) {
+                <shared-ui-tag-component [tagText]="tag" />
+                }
+            </div>
+
+            <div class="check-button">
+                <shared-ui-button-component buttonText="Next" (shareClicked)="nextFlashcard()" />
+
+                <!-- <button nz-button nzType="primary" (click)="nextFlashcard()">
+        Next
+      <nz-icon nzType="right" />
+      </button> -->
+            </div>
+        </div>
+
+        <div class="card-center">
+
+            <div class="meaning">
+                <span>{{store.flashcard().data.meaning}}</span>
+            </div>
+
+            <div class="word">
+                <h2>{{store.flashcard().data.word}}</h2>
+            </div>
+
+        </div>
+
+ 
+    </div>
+</nz-card>

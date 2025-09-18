@@ -1,41 +1,18 @@
-  .trigger {
-    font-size: 18px;
-    line-height: 64px;
-    padding: 0 24px;
-    cursor: pointer;
-    transition: color 0.3s;
-  }
+.container {
+  background-color: rgb(249, 248, 247);
+  margin-top: 2em;
+}
 
-  .trigger:hover {
-    color: #1890ff;
-  }
+nz-tabs {
+    background-color: rgb(255, 255, 255);
+    padding-left: 1em;
+}
 
-  .logo {
-    height: 32px;
-    background: rgba(255, 255, 255, 0.2);
-    margin: 16px;
-  }
+.main {
+  padding-top: 1em;
+}
 
-  nz-header {
-    background: #fff;
-    padding: 0;
-  }
+a {
+  color: black;
+}
 
-  nz-content {
-    margin: 0 16px;
-  }
-
-  nz-breadcrumb {
-    margin: 16px 0;
-  }
-
-  .inner-content {
-    min-height: 95vh;
-    padding: 10px;
-    margin-top: 1em;
-  }
-
-
-  nz-footer {
-    text-align: center;
-  }

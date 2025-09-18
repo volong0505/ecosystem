@@ -1,5 +1,5 @@
+import { API_ROUTES, CreateWordRequest, CreateWordResponse, FindWordRequest, FindWordResponse, FindWordsRequest, FindWordsResponse } from "@ecosystem/api-interfaces";
 import { Body, Controller, Get, Post, Query, ServiceUnavailableException } from "@nestjs/common";
-import { API_ROUTES, CreateWordRequest, CreateWordResponse, FindWordRequest, FindWordResponse, FindWordsRequest, FindWordsResponse, FlashcardRequest, FlashcardResponse } from "@ecosystem/api-interfaces";
 import { WordService } from "./word.service";
 
 const routers = API_ROUTES.WORD;
@@ -13,12 +13,12 @@ export class WordController {
     async generateWord(@Query() req: { word: string }) {
         try {
             // Call the service to generate word details
-            const wordDetails = await this.service.generateWord(req.word);
-
+            const data = await this.service.generateWord(req.word);
+         
             // Return the generated word details
             return {
                 success: true,
-                data: wordDetails,
+                data
             }
         } catch (error) {
             // Handle any errors that occur during word generation
@@ -48,8 +48,5 @@ export class WordController {
         return this.service.create(body);
     }
 
-    @Get(routers.FLASHCARD)
-    flashcardOfTheDay(@Query() req: FlashcardRequest): Promise<FlashcardResponse> {
-        return this.service.flashcard(req);
-    }
+  
 }

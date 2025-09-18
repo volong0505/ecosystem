@@ -81,7 +81,6 @@ export const DataAccessWordStore = signalStore(
             try {
                 const res$ = service.createVocabulary(request);
                 await lastValueFrom(res$);
-                console.log(store.list.page())
                 const params = {
                     keyword: request.keyword || '',
                     page: store.list.page(),

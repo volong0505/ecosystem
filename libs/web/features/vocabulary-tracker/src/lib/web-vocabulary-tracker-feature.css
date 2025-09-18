@@ -1,6 +1,7 @@
 .ctn {
+    background-color: rgb(255, 255, 255);
     border-radius: 8px;
-    padding: 10px;
+    margin: 10px 20px 0 20px
 }
 
 nz-input-group {
