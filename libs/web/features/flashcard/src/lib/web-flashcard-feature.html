@@ -1,0 +1,8 @@
+<div class="container">
+  @if(store.flashcard().data.alreadyLearned)
+  {
+  <flashcard-card-review />
+  } @else {
+  <flashcard-card-study />
+  }
+</div>

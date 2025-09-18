@@ -29,11 +29,13 @@ export class DataAccessWordService {
         const params = new HttpParams()
             .set('id', id)
         return this.http.get<FindWordResponse>(apiRoutes.FIND_ONE, { params: params });
-    }
+    } 
 
     // Example method to add a new word
     createVocabulary(dto: CreateWordRequest): Observable<CreateWordResponse> {
         return this.http.post<CreateWordResponse>(apiRoutes.CREATE, dto)
         // Logic to add a new word to the vocabulary list
     }
+
+   
 }

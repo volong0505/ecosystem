@@ -1,7 +1,17 @@
 .table-ctn {
-    background-color: #fff;
     border-radius: 8px;
     padding: 10px;
+}
+
+.btn {
+    padding-right: 1em;
+}
+
+.statistical {
+    margin-right: 1em;
+    margin-top: 4px;
+    font-size: 15px;
+    float: right;
 }
 
 .table-header {

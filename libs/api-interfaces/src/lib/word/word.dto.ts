@@ -18,5 +18,9 @@ export class WordDto {
   tags?: string[];
   examples!: WordSentence[];
   creationDate?: Date;
-  latestReviewDate?: Date;
+  reviewedAt?: Date;
+
+  // flashcard properties
+  repetition?: number;
+  nextReviewDate?: Date;
 }

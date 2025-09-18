@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { Word, WordDocument } from '@ecosystem/infra-database';
+import { Word } from '@ecosystem/infra-database';
 import { CreateWordRequest, FindWordsRequest } from '@ecosystem/api-interfaces';
 
 @Injectable()
 export class WordRepository {
-  constructor(
 
+  constructor(
     @InjectModel(Word.name)
-    private readonly model: Model<WordDocument>,
+    private readonly model: Model<Word>,
   ) {}
 
   async create(vocab: Partial<CreateWordRequest>): Promise<Word> {
@@ -19,14 +19,17 @@ export class WordRepository {
 
   async findAllByLanguage(params: FindWordsRequest): Promise<Word[]> {
     const {keyword, languageCode, sortField, sortOrder, page = 1} = params; 
-    const limit = 10; // Number of items per page 
+    const limit = 12; // Number of items per page 
     
     const conditions: any = {
       languageCode: languageCode,
     }
 
     if (keyword) {
-      conditions['word'] = { $regex: keyword, $options: 'i' }; // Case-insensitive search
+      conditions['$or'] = [
+        { word:  {$regex: keyword, $options: 'i'}},
+        { translation:  {$regex: keyword, $options: 'i'}}
+      ]
     }
 
     let query = this.model.find(conditions);
@@ -49,8 +52,12 @@ export class WordRepository {
     }
 
     if (keyword) {
-      conditions['word'] = { $regex: keyword, $options: 'i' }; // Case-insensitive search
+      conditions['$or'] = [
+        { word:  {$regex: keyword, $options: 'i'}},
+        { translation:  {$regex: keyword, $options: 'i'}}
+      ]
     }
+
     let query = this.model.countDocuments(conditions);
     return query.exec()
   }
@@ -58,6 +65,16 @@ export class WordRepository {
   findOne(id: string): Promise<Word | null> {
     const _id = new Types.ObjectId(id)
     return this.model.findById(_id).exec();
+  }
+
+  findByWord(value: string): Promise<Word | null> {
+    return this.model.findOne({
+      $or: [
+        { word:  {$regex: value, $options: 'i'}},
+        { translation:  {$regex: value, $options: 'i'}}
+      ],
+    }
+  )
   }
 
   async findBytags(languageCode: string, tags: string): Promise<Word[]> {
@@ -71,4 +88,6 @@ export class WordRepository {
   async deleteById(id: string): Promise<void> {
     await this.model.findByIdAndDelete(id).exec();
   }
+
+
 }

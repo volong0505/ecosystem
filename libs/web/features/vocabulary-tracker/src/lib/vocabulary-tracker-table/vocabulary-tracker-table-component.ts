@@ -11,6 +11,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { DataAccessWordStore } from '@ecosystem/data-access-word';
 import { ButtonComponent } from '@ecosystem/web-shared-ui';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 @Component({
   selector: 'vocabulary-tracker-table-component',
   imports: [
@@ -23,6 +24,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     NzFlexModule,
     NzDividerModule,
     NzPaginationModule,
+    NzGridModule,
     ReactiveFormsModule,
 
     ButtonComponent

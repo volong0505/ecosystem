@@ -16,6 +16,10 @@ export const webShellRoutes: Route[] = [
             {
                 path: 'vocabulary-tracker',
                 loadComponent: () => import('@ecosystem/web-vocabulary-tracker-feature').then(c => c.WebVocabularyTrackerFeature)
+            },
+             {
+                path: 'flashcards',
+                loadComponent: () => import('@ecosystem/web-flashcard-feature').then(c => c.WebFlashcardFeature)
             }
         ]
     }

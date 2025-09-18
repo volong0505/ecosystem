@@ -1,6 +1,6 @@
+import { CreateWordRequest, CreateWordResponse, FindWordRequest, FindWordResponse, FindWordsRequest, FindWordsResponse, WordsItem } from "@ecosystem/api-interfaces";
 import { Injectable } from "@nestjs/common";
 import { GeminiService } from "../gemeni/gemini.service";
-import { CreateWordRequest, CreateWordResponse, FindWordsRequest, FindWordsResponse, FindWordRequest, FindWordResponse, WordsItem } from "@ecosystem/api-interfaces";
 import { WordRepository } from "./word.repository";
 
 @Injectable()
@@ -10,10 +10,20 @@ export class WordService {
     private readonly geminiService: GeminiService,
   ) {}
 
-    async generateWord(word: string) {
+    async generateWord(text: string) {
         // Call Gemini service to get Word details
-        const geminiResponse = await this.geminiService.generateWordDetail(word);
-        
+        const geminiResponse = await this.geminiService.generateWordDetail(text);
+        const word: FindWordResponse = await this.findByWord(text)
+        const existed = word.data && (geminiResponse.word).toLowerCase() == (word.data.word).toLowerCase() ?
+            {
+                status: true,
+                word: word.data.word,
+                translation: word.data.translation,
+            } : {
+                status: false,
+                word: null,
+                translation: null
+            }
         // Process the response and return it
         return {
         languageCode: 'en',
@@ -26,6 +36,8 @@ export class WordService {
         partsOfSpeech: geminiResponse.partsOfSpeech,
         tags: geminiResponse.tags,
         examples: geminiResponse.examples,
+        related_words: geminiResponse.related_words,
+        isExisted: existed
         };
     }
 
@@ -33,7 +45,7 @@ export class WordService {
         // Fetch the Word list from the repository
         const params = {
             languageCode: 'en',
-            sortField: 'createdAt',
+            sortField: 'creationDate',
             sortOrder: '-1',
             keyword: req.keyword || '',
             page: req.page,
@@ -80,6 +92,7 @@ export class WordService {
         return {
             data: word ? {
                 _id: word._id.toString(),
+                languageCode: word.languageCode,
                 word: word.word,
                 meaning: word.meaning,
                 ipa: word.ipa,
@@ -89,7 +102,27 @@ export class WordService {
                 pronunciation: word.pronunciation,
                 tags: word.tags,
                 examples: word.examples || [],
-            } : {}
+            } : null
+        }
+    }
+
+  
+    async findByWord(value: string): Promise<FindWordResponse> {
+        const word = await this.repository.findByWord(value);
+        return {
+            data: word ? {
+                _id: word._id.toString(),
+                languageCode: word.languageCode,
+                word: word.word,
+                meaning: word.meaning,
+                ipa: word.ipa,
+                level: word.level,
+                partsOfSpeech: word.partsOfSpeech,
+                translation: word.translation,
+                pronunciation: word.pronunciation,
+                tags: word.tags,
+                examples: word.examples || [],
+            } : null
         }
     }
 }

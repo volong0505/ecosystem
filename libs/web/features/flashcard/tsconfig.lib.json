@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../../../dist/out-tsc",
+    "declaration": true,
+    "declarationMap": true,
+    "inlineSources": true,
+    "module": "preserve",
+    "types": [],
+    "lib": [
+      "dom",
+      "es2017"
+    ],
+  },
+  "exclude": ["src/**/*.spec.ts", "jest.config.ts", "src/**/*.test.ts"],
+  "include": ["src/**/*.ts"]
+}

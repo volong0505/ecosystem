@@ -5,5 +5,5 @@ export class FindWordRequest {
 }
 
 export class FindWordResponse {
-    data!: WordDto | {};
+    data!: WordDto | null;
 }

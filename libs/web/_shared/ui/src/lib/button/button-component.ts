@@ -11,6 +11,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 })
 export class ButtonComponent {
   @Input() buttonText: string = 'Button';
+  @Input() disabled: boolean = false;
   @Output() shareClicked = new EventEmitter<void>();
 
   onClick(): void {

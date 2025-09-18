@@ -1,0 +1,13 @@
+{
+  "name": "web-flashcard-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/web/features/flashcard/src",
+  "prefix": "web-flashcard",
+  "projectType": "library",
+  "tags": ["feature"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

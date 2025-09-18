@@ -1,9 +1,8 @@
 import { inject } from '@angular/core';
+import { FindWordResponse, FindWordsRequest, WordDto, WordsItem } from '@ecosystem/api-interfaces';
 import { patchState, signalStore, withHooks, withMethods, withState } from '@ngrx/signals';
 import { lastValueFrom } from 'rxjs';
-import { FindWordResponse, FindWordsRequest, WordDto, WordsItem } from '@ecosystem/api-interfaces';
 import { DataAccessWordService } from './data-access-word.service';
-
 
 export interface WordStateModel {
     list: {
@@ -82,7 +81,6 @@ export const DataAccessWordStore = signalStore(
             try {
                 const res$ = service.createVocabulary(request);
                 await lastValueFrom(res$);
-                console.log(store.list.page())
                 const params = {
                     keyword: request.keyword || '',
                     page: store.list.page(),
@@ -109,8 +107,7 @@ export const DataAccessWordStore = signalStore(
             const res$ = service.getOne(id);
             const res: FindWordResponse  = await lastValueFrom(res$);
             patchState(store, { detail: { ...store.detail(), isLoading: false, data: res.data as WordDto || null}});
-
-        }
+        },
     })
     ),
     withHooks({
