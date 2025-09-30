@@ -73,28 +73,24 @@
                                 <nz-option [nzValue]="part.value" [nzLabel]="part.label"></nz-option>
                                 }
 
-                            </nz-select> </nz-form-control>
+                            </nz-select> 
+                        </nz-form-control>
+                    </nz-form-item>
+
+                     <nz-form-item>
+
+                        <nz-form-control [nzSm]="12" [nzXs]="24">
+                            <nz-select nzMode="tags" class="select-right" formControlName="tags"
+                                nzVariant="underlined" nzPlaceHolder="Tag">
+                                @for( tag of tagOptions; track tag) {
+                                <nz-option [nzValue]="tag" [nzLabel]="tag"></nz-option>
+                                }
+
+                            </nz-select> 
+                        </nz-form-control>
                     </nz-form-item>
 
                 </form>
-
-
-                @for (tag of tags; track tag) {
-                <nz-tag [nzMode]="$index === 0 ? 'default' : 'closeable'" (nzOnClose)="handleClose(tag)">
-                    {{ sliceTagName(tag) }}
-                </nz-tag>
-                }
-
-                @if (!inputVisible) {
-                <nz-tag class="editable-tag" nzNoAnimation (click)="showInput()">
-                    <nz-icon nzType="plus" />
-                    New Tag
-                </nz-tag>
-                } @else {
-                <input #inputElement nz-input nzSize="small" type="text" [(ngModel)]="inputValue" style="width: 78px;"
-                    (blur)="handleInputConfirm()" (keydown.enter)="handleInputConfirm()" />
-                }
-
             </div>
 
 

@@ -1,3 +1,6 @@
+import { WordTagsStore } from '@ecosystem/share-store';
+const tags = WordTagsStore;
+
 export const generateWordPrompt = `
 Bạn là một trợ lý AI giúp tôi học tiếng Anh.
 Dựa trên từ vựng mà tôi yêu cầu, bạn hãy trả về **duy nhất một object JSON** có định dạng sau:
@@ -11,7 +14,7 @@ Dựa trên từ vựng mà tôi yêu cầu, bạn hãy trả về **duy nhất 
     "pronunciation": string,
     "level": string,
     "partsOfSpeech": array of string,
-    "tags": array of string,
+    "tags": string in ${tags},
     "examples":
         {
             "sentence": string,
@@ -25,7 +28,7 @@ Dựa trên từ vựng mà tôi yêu cầu, bạn hãy trả về **duy nhất 
  + word: trả về dạng nguyên mẫu, ví dụ: Opinions -> Opinion
  + ipa: sử dụng US IPA
  + pronunciation: sử dụng phát âm American pronunciation.
- + tags: là một mảng các từ khóa liên quan đến từ vựng này, ví dụ: ["Environment", "Gardening"],    
+ + tags: là một từ khóa liên quan nhất đến từ vựng này, ví dụ: "Gardening",    
  + related_words: là một mảng các từ ở dạng: V2, V3, các biến thể Parts Of Speech nếu có
   Ví dụ:
   - Từ "Greenhouse"
@@ -39,7 +42,7 @@ Dựa trên từ vựng mà tôi yêu cầu, bạn hãy trả về **duy nhất 
     "pronunciation": "GRIN-hào-s",
     "level": "A2",
     "partsOfSpeech": [noun],
-    "tags": ["Environment", "Gardening"],
+    "tags": "Gardening",
     "examples": [
         {
             "sentence": "The greenhouse keeps the plants warm during winter.",

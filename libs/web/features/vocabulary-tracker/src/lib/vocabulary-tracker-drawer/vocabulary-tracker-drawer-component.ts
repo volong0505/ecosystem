@@ -1,4 +1,5 @@
 import { Component, effect, ElementRef, inject, ViewChild } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CreateWordRequest, WordSentence } from '@ecosystem/api-interfaces';
 import { DataAccessWordStore } from '@ecosystem/data-access-word';
@@ -13,7 +14,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
-
+// import { WordTagsStore } from '@ecosystem/share-store';
 interface WordSentenceExample extends WordSentence {
   id: number;
 }
@@ -35,6 +36,7 @@ interface WordSentenceExample extends WordSentence {
 
     ReactiveFormsModule,
     FormsModule,
+    BrowserAnimationsModule
   ],
   templateUrl: './vocabulary-tracker-drawer-component.html',
   styleUrl: './vocabulary-tracker-drawer-component.css',
@@ -46,7 +48,6 @@ export class VocabularyTrackerDrawerComponent {
   isSpinning = false;
   visible = true;
 
-  tags: string[] = [];
   inputVisible = false;
   inputValue = '';
   isExisted =  {
@@ -71,6 +72,8 @@ export class VocabularyTrackerDrawerComponent {
     { label: 'Phrasal verb', value: 'phrasal verb'}
   ];
 
+  tagOptions = [];
+
   validateForm = this.fb.group({
     word: this.fb.control('', [Validators.required]),
     pronunciation: this.fb.control(''),
@@ -79,6 +82,7 @@ export class VocabularyTrackerDrawerComponent {
     level: this.fb.control(''),
     partsOfSpeech: this.fb.control<string[]>([]),
     ipa: this.fb.control(''),
+    tags: this.fb.control(''),
   });
 
   askAIForm = this.fb.group({
@@ -87,6 +91,7 @@ export class VocabularyTrackerDrawerComponent {
 
 
   constructor() { 
+    console.log(this.tagOptions)
    effect(() => {
        this.validateForm.patchValue({
         word: this.detail?.word,
@@ -96,6 +101,7 @@ export class VocabularyTrackerDrawerComponent {
         level: this.detail?.level,
         partsOfSpeech: this.detail?.partsOfSpeech || [],
         ipa: this.detail?.ipa,
+        tags: this.detail?.tags || '',
       });
 
       this.examples = this.detail?.examples.map((sentence: any, index: number) => ({
@@ -104,7 +110,6 @@ export class VocabularyTrackerDrawerComponent {
         meaning: sentence.meaning,
         pronunciation: sentence.pronunciation
       })) || [];
-      this.tags = this.detail?.tags || [];
     });
   
   }
@@ -116,7 +121,6 @@ export class VocabularyTrackerDrawerComponent {
   ngOnDestroy() {
     this.validateForm.reset(); // 🧹 Clear form value
     this.askAIForm.reset(); // 🧹 Clear AI form value
-    this.tags = []; // 🧹 Clear tags
     this.examples = []; // 🧹 Clear examples
   }
 
@@ -126,7 +130,7 @@ export class VocabularyTrackerDrawerComponent {
         ...this.validateForm.value,
         word: this.validateForm.value.word || '',
         languageCode: 'en', // Assuming 'en' as default language code, can be changed as needed
-        tags: this.tags,
+        tags: this.validateForm.value.tags || '',
         examples: this.examples.map(example => ({
           sentence: example.sentence,
           pronunciation: example.pronunciation,
@@ -169,6 +173,7 @@ export class VocabularyTrackerDrawerComponent {
         level: data.level,
         partsOfSpeech: data.partsOfSpeech,
         ipa: data.ipa,
+        tags: data.tags,
       });
 
       this.examples = data.examples.map((sentence: any, index: number) => ({
@@ -179,8 +184,6 @@ export class VocabularyTrackerDrawerComponent {
       }));
 
       this.isExisted = data.isExisted,
-
-      this.tags = data.tags || [];
       this.isSpinning = false;
     }
   }
@@ -194,14 +197,14 @@ export class VocabularyTrackerDrawerComponent {
     this.examples = this.examples.filter(s => s.id !== id);
   }
 
-  handleClose(removedTag: {}): void {
-    this.tags = this.tags.filter(tag => tag !== removedTag);
-  }
+  // handleClose(removedTag: {}): void {
+  //   this.tags = this.tags.filter(tag => tag !== removedTag);
+  // }
 
-  sliceTagName(tag: string): string {
-    const isLongTag = tag.length > 20;
-    return isLongTag ? `${tag.slice(0, 20)}...` : tag;
-  }
+  // sliceTagName(tag: string): string {
+  //   const isLongTag = tag.length > 20;
+  //   return isLongTag ? `${tag.slice(0, 20)}...` : tag;
+  // }
 
   showInput(): void {
     this.inputVisible = true;
@@ -210,12 +213,12 @@ export class VocabularyTrackerDrawerComponent {
     }, 10);
   }
 
-  handleInputConfirm(): void {
+  // handleInputConfirm(): void {
 
-    if (this.inputValue && this.tags.indexOf(this.inputValue) === -1) {
-      this.tags = [...this.tags, this.inputValue];
-    }
-    this.inputValue = '';
-    this.inputVisible = false;
-  }
+  //   if (this.inputValue && this.tags.indexOf(this.inputValue) === -1) {
+  //     this.tags = [...this.tags, this.inputValue];
+  //   }
+  //   this.inputValue = '';
+  //   this.inputVisible = false;
+  // }
 }

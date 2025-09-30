@@ -17,7 +17,7 @@ export class WordsItem {
     partsOfSpeech?: string[];
     translation!: string;
     pronunciation!: string;
-    tags?: string[];
+    tags?: string;
     examples!: WordSentence[] | [];
 }
 

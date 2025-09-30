@@ -15,7 +15,7 @@ export class WordDto {
   pronunciation?: string;
   level?: string;
   partsOfSpeech?: string[];
-  tags?: string[];
+  tags?: string;
   examples!: WordSentence[];
   creationDate?: Date;
   reviewedAt?: Date;

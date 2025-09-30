@@ -42,7 +42,6 @@ export class FlashcardService {
 
         let repetition = word.repetition | 0;
         if (neededHelp && neededHelp.toString() == 'true') {
-            console.log(typeof(neededHelp))
             repetition = 0;
         }
         const nextReviewDate = this.getNextReviewDate(repetition);
