@@ -14,7 +14,7 @@ export class FlashcardDto {
     pronunciation?: string;
     level?: string;
     partsOfSpeech?: string[];
-    tags?: string;
+    category?: string;
     examples!: WordSentence[];
     alreadyLearned!: boolean;
 }

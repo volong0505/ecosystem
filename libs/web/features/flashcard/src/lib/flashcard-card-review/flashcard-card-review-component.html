@@ -13,7 +13,8 @@
             </div>
 
             <div class="check-button">
-                <shared-ui-button-component [disabled]="!isCorrect()" buttonText="Next" (shareClicked)="nextFlashcard()" />
+                <shared-ui-button-component [disabled]="!isCorrect()" buttonText="Next"
+                    (shareClicked)="nextFlashcard()" />
 
                 <!-- <button nz-button nzType="primary" (click)="nextFlashcard()">
         Next
@@ -32,17 +33,23 @@
                 <input [(ngModel)]="value" [nzStatus]="status" (ngModelChange)="compare()" nz-input nzSize="large" />
             </div>
 
-
             @if(this.isCorrect() == true) {
-            <div class="sentences">
-                <div class="sentences-title"> Sentences: </div>
-                @for(sentence of store.flashcard.data().examples; track sentence) {
+            <div class="hide">
                 <div>
-                    <div class="sentence">{{sentence.sentence}} ({{sentence.meaning}})</div>
+                    <span>{{store.flashcard.data().pronunciation}}</span>
                 </div>
-                }
 
+                <div class="sentences">
+                    <div class="sentences-title"> Sentences: </div>
+                    @for(sentence of store.flashcard.data().examples; track sentence) {
+                    <div>
+                        <div class="sentence">{{sentence.sentence}} ({{sentence.meaning}})</div>
+                    </div>
+                    }
+
+                </div>
             </div>
+
             }
         </div>
 

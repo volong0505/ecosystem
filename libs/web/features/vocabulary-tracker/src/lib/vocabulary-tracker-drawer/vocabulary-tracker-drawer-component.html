@@ -78,18 +78,15 @@
                     </nz-form-item>
 
                      <nz-form-item>
-
                         <nz-form-control [nzSm]="12" [nzXs]="24">
-                            <nz-select nzMode="tags" class="select-right" formControlName="tags"
-                                nzVariant="underlined" nzPlaceHolder="Tag">
-                                @for( tag of tagOptions; track tag) {
-                                <nz-option [nzValue]="tag" [nzLabel]="tag"></nz-option>
+                            <nz-select formControlName="category"
+                                nzVariant="underlined" nzPlaceHolder="Category">
+                                @for( category of categoryOptions(); track category) {
+                                <nz-option [nzValue]="category" [nzLabel]="category"></nz-option>
                                 }
-
                             </nz-select> 
                         </nz-form-control>
                     </nz-form-item>
-
                 </form>
             </div>
 

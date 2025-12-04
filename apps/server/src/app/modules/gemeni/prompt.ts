@@ -1,5 +1,5 @@
-import { WordTagsStore } from '@ecosystem/share-store';
-const tags = WordTagsStore;
+import { WordCategoriesStore } from '@ecosystem/share-store';
+const categies = WordCategoriesStore;
 
 export const generateWordPrompt = `
 Bạn là một trợ lý AI giúp tôi học tiếng Anh.
@@ -14,7 +14,7 @@ Dựa trên từ vựng mà tôi yêu cầu, bạn hãy trả về **duy nhất 
     "pronunciation": string,
     "level": string,
     "partsOfSpeech": array of string,
-    "tags": string in ${tags},
+    "category": string in ${categies},
     "examples":
         {
             "sentence": string,
@@ -28,7 +28,7 @@ Dựa trên từ vựng mà tôi yêu cầu, bạn hãy trả về **duy nhất 
  + word: trả về dạng nguyên mẫu, ví dụ: Opinions -> Opinion
  + ipa: sử dụng US IPA
  + pronunciation: sử dụng phát âm American pronunciation.
- + tags: là một từ khóa liên quan nhất đến từ vựng này, ví dụ: "Gardening",    
+ + category: là một từ khóa liên quan nhất đến từ vựng này, ví dụ: "Gardening",    
  + related_words: là một mảng các từ ở dạng: V2, V3, các biến thể Parts Of Speech nếu có
   Ví dụ:
   - Từ "Greenhouse"
@@ -42,7 +42,7 @@ Dựa trên từ vựng mà tôi yêu cầu, bạn hãy trả về **duy nhất 
     "pronunciation": "GRIN-hào-s",
     "level": "A2",
     "partsOfSpeech": [noun],
-    "tags": "Gardening",
+    "category": "Gardening",
     "examples": [
         {
             "sentence": "The greenhouse keeps the plants warm during winter.",

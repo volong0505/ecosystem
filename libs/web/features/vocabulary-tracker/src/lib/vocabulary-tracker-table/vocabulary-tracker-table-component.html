@@ -52,7 +52,7 @@
         <th nzWidth="20%">Meaning</th>
         <th nzWidth="5%">Level</th>
         <th nzWidth="10%">Parts Of Speech</th>
-        <th nzWidth="12%">Tags</th>
+        <th nzWidth="12%">Category</th>
         <th nzWidth="5%"></th>
       </tr>
     </thead>
@@ -81,11 +81,7 @@
           }
         </td>
         <td>
-          @for (tag of data.tags; track tag) {
-          <nz-tag>
-            {{ tag}}
-          </nz-tag>
-          }
+       <nz-tag>{{data.category}}</nz-tag>
         </td>
         <td class="action">
           <a (click)="store.onEdit(data._id)"><nz-icon nzType="edit" nzTheme="outline" /></a>

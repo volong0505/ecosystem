@@ -50,7 +50,7 @@ export class CreateWordRequest {
 
   @IsOptional()
   @IsString()
-  tags?: string;
+  category?: string;
 
  
   examples!: ExampleDto[];

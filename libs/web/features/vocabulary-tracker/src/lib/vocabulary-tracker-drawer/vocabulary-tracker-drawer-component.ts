@@ -1,5 +1,4 @@
-import { Component, effect, ElementRef, inject, ViewChild } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Component, effect, ElementRef, inject, signal, ViewChild } from '@angular/core';
 import { FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CreateWordRequest, WordSentence } from '@ecosystem/api-interfaces';
 import { DataAccessWordStore } from '@ecosystem/data-access-word';
@@ -14,7 +13,9 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
-// import { WordTagsStore } from '@ecosystem/share-store';
+import { WordCategoriesStore } from '@ecosystem/share-store';
+
+const categoryOptions = WordCategoriesStore;
 interface WordSentenceExample extends WordSentence {
   id: number;
 }
@@ -35,8 +36,7 @@ interface WordSentenceExample extends WordSentence {
     NzAlertModule,
 
     ReactiveFormsModule,
-    FormsModule,
-    BrowserAnimationsModule
+    FormsModule
   ],
   templateUrl: './vocabulary-tracker-drawer-component.html',
   styleUrl: './vocabulary-tracker-drawer-component.css',
@@ -72,7 +72,7 @@ export class VocabularyTrackerDrawerComponent {
     { label: 'Phrasal verb', value: 'phrasal verb'}
   ];
 
-  tagOptions = [];
+  categoryOptions = signal(categoryOptions.map(t => t));
 
   validateForm = this.fb.group({
     word: this.fb.control('', [Validators.required]),
@@ -82,7 +82,7 @@ export class VocabularyTrackerDrawerComponent {
     level: this.fb.control(''),
     partsOfSpeech: this.fb.control<string[]>([]),
     ipa: this.fb.control(''),
-    tags: this.fb.control(''),
+    category: this.fb.control<string | null>(null),
   });
 
   askAIForm = this.fb.group({
@@ -91,7 +91,6 @@ export class VocabularyTrackerDrawerComponent {
 
 
   constructor() { 
-    console.log(this.tagOptions)
    effect(() => {
        this.validateForm.patchValue({
         word: this.detail?.word,
@@ -101,7 +100,7 @@ export class VocabularyTrackerDrawerComponent {
         level: this.detail?.level,
         partsOfSpeech: this.detail?.partsOfSpeech || [],
         ipa: this.detail?.ipa,
-        tags: this.detail?.tags || '',
+        category: this.detail?.category || null,
       });
 
       this.examples = this.detail?.examples.map((sentence: any, index: number) => ({
@@ -130,7 +129,7 @@ export class VocabularyTrackerDrawerComponent {
         ...this.validateForm.value,
         word: this.validateForm.value.word || '',
         languageCode: 'en', // Assuming 'en' as default language code, can be changed as needed
-        tags: this.validateForm.value.tags || '',
+        category: this.validateForm.value.category || '',
         examples: this.examples.map(example => ({
           sentence: example.sentence,
           pronunciation: example.pronunciation,
@@ -173,7 +172,7 @@ export class VocabularyTrackerDrawerComponent {
         level: data.level,
         partsOfSpeech: data.partsOfSpeech,
         ipa: data.ipa,
-        tags: data.tags,
+        category: data.category,
       });
 
       this.examples = data.examples.map((sentence: any, index: number) => ({
@@ -198,7 +197,7 @@ export class VocabularyTrackerDrawerComponent {
   }
 
   // handleClose(removedTag: {}): void {
-  //   this.tags = this.tags.filter(tag => tag !== removedTag);
+  //   this.tag = this.tag.filter(tag => tag !== removedTag);
   // }
 
   // sliceTagName(tag: string): string {
@@ -215,8 +214,8 @@ export class VocabularyTrackerDrawerComponent {
 
   // handleInputConfirm(): void {
 
-  //   if (this.inputValue && this.tags.indexOf(this.inputValue) === -1) {
-  //     this.tags = [...this.tags, this.inputValue];
+  //   if (this.inputValue && this.tag.indexOf(this.inputValue) === -1) {
+  //     this.tag = [...this.tag, this.inputValue];
   //   }
   //   this.inputValue = '';
   //   this.inputVisible = false;

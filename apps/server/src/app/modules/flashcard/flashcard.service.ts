@@ -25,7 +25,7 @@ export class FlashcardService {
                     pronunciation: word.pronunciation,
                     level: word.level,
                     partsOfSpeech: word.partsOfSpeech,
-                    tags: word.tags,
+                    category: word.category,
                     examples: word.examples || [],
                     alreadyLearned: word.repetition >= 1
                 } : {} as FlashcardDto

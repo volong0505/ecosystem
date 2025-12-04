@@ -25,7 +25,7 @@ export class GeminiService {
         try {
     //   this.logger.log(`Send prompt tới Gemini: ${prompt}`);
       const result = await this.geminiModel.generateContent(prompt);
-      const response = await result.response;
+      const response = result.response;
       const text = response.text();
       try {
         // Gemini có thể trả về thêm ký tự hoặc không phải JSON thuần túy,

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+
 @Component({
   imports: [
-    RouterModule
+    RouterModule,
+    
   ],
   selector: 'app-root',
   templateUrl: './app.html',

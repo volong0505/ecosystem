@@ -34,7 +34,7 @@ export class WordService {
         pronunciation: geminiResponse.pronunciation,
         level: geminiResponse.level,
         partsOfSpeech: geminiResponse.partsOfSpeech,
-        tags: geminiResponse.tags,
+        category: geminiResponse.category,
         examples: geminiResponse.examples,
         related_words: geminiResponse.related_words,
         isExisted: existed
@@ -65,7 +65,7 @@ export class WordService {
             partsOfSpeech: item.partsOfSpeech,
             translation: item.translation,
             pronunciation: item.pronunciation || '',
-            tags: item.tags,
+            category: item.category,
             examples: item.examples || [],
         }));        
         // Return the Word list
@@ -100,7 +100,7 @@ export class WordService {
                 partsOfSpeech: word.partsOfSpeech,
                 translation: word.translation,
                 pronunciation: word.pronunciation,
-                tags: word.tags,
+                category: word.category,
                 examples: word.examples || [],
             } : null
         }
@@ -120,7 +120,7 @@ export class WordService {
                 partsOfSpeech: word.partsOfSpeech,
                 translation: word.translation,
                 pronunciation: word.pronunciation,
-                tags: word.tags,
+                category: word.category,
                 examples: word.examples || [],
             } : null
         }

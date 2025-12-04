@@ -1,1 +1,1 @@
-export * from './word-tags.store';
+export * from './word-categies.store';
