@@ -45,8 +45,13 @@ input {
   border-radius: 12px
 }
 
+.hide {
+  padding-top: 1em;
+
+}
+
 .sentences {
-  padding-top: 2em;
+   padding-top: 1em;
 }
 
 .sentences-title {

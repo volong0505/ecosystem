@@ -25,7 +25,7 @@ export class FlashcardService {
                     pronunciation: word.pronunciation,
                     level: word.level,
                     partsOfSpeech: word.partsOfSpeech,
-                    tags: word.tags,
+                    category: word.category,
                     examples: word.examples || [],
                     alreadyLearned: word.repetition >= 1
                 } : {} as FlashcardDto
@@ -42,7 +42,6 @@ export class FlashcardService {
 
         let repetition = word.repetition | 0;
         if (neededHelp && neededHelp.toString() == 'true') {
-            console.log(typeof(neededHelp))
             repetition = 0;
         }
         const nextReviewDate = this.getNextReviewDate(repetition);

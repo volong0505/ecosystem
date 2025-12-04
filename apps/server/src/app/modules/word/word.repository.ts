@@ -73,12 +73,11 @@ export class WordRepository {
         { word:  {$regex: value, $options: 'i'}},
         { translation:  {$regex: value, $options: 'i'}}
       ],
-    }
-  )
+    })
   }
 
-  async findBytags(languageCode: string, tags: string): Promise<Word[]> {
-    return this.model.find({ languageCode, tags }).exec();
+  async findByCategory(languageCode: string, category: string): Promise<Word[]> {
+    return this.model.find({ languageCode, category }).exec();
   }
 
   async updateById(id: string, update: Partial<Word>): Promise<Word | null> {
@@ -88,6 +87,4 @@ export class WordRepository {
   async deleteById(id: string): Promise<void> {
     await this.model.findByIdAndDelete(id).exec();
   }
-
-
 }

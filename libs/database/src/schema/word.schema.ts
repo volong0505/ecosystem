@@ -48,7 +48,7 @@ export class Word {
   partsOfSpeech?: string[];
   
   @Prop()
-  tags?: string[];
+  category?: string;
 
   @Prop({ type: [ExampleSchema], default: [] })
   examples!: Example[];
