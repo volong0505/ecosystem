@@ -1,4 +1,4 @@
-import { WordSentence } from "./word.dto";
+import { Definition } from "./word.dto";
 
 export class FindWordsRequest {
     keyword?: string;
@@ -11,14 +11,11 @@ export class FindWordsRequest {
 export class WordsItem {
     _id!: string;
     word!: string;
-    meaning!: string;
+    translation!: string;
     ipa!: string;
     level?: string;
-    partsOfSpeech?: string[];
-    translation!: string;
-    pronunciation!: string;
-    category?: string;
-    examples!: WordSentence[] | [];
+    partOfSpeech?: string;
+    definitions!: Definition[] | [];
 }
 
 

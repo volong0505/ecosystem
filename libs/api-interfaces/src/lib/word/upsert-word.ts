@@ -2,21 +2,29 @@ import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { BaseResponse } from '../base-response';
 import { WordDto } from './word.dto';
 
-class ExampleDto {
+class DefinitionDto {
   @IsString()
   @IsNotEmpty()
-  sentence!: string;
+  translation!: string;
 
   @IsOptional()
   @IsString()
-  pronunciation?: string;
+  explanation?: string;
 
   @IsOptional()
   @IsString()
-  meaning?: string;
+  example?: string;
+
+  @IsOptional()
+  @IsString()
+  exampleVi?: string;
 }
 
-export class CreateWordRequest {
+export class UpsertWordRequest {
+
+  @IsString()
+  _id!: string | null;
+
   @IsString()
   @IsNotEmpty()
   languageCode!: string;
@@ -30,14 +38,7 @@ export class CreateWordRequest {
 
   @IsOptional()
   @IsString()
-  pronunciation?: string;
-
-  @IsOptional()
-  @IsString()
-  meaning?: string;
-
-  @IsOptional()
-  @IsString()
+  @IsNotEmpty()
   ipa?: string;
 
   @IsOptional()
@@ -46,15 +47,14 @@ export class CreateWordRequest {
 
   @IsOptional()
   @IsString()
-  partsOfSpeech?: string[];
+  @IsNotEmpty()
+  partOfSpeech!: string;
 
-  @IsOptional()
   @IsString()
-  category?: string;
-
+  usageNote!: string;
  
-  examples!: ExampleDto[];
+  definitions!: DefinitionDto[];
 }
 
-export class CreateWordResponse extends BaseResponse<WordDto> {
+export class UpsertWordResponse extends BaseResponse<WordDto> {
 }

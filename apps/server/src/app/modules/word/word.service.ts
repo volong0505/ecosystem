@@ -1,4 +1,5 @@
-import { CreateWordRequest, CreateWordResponse, FindWordRequest, FindWordResponse, FindWordsRequest, FindWordsResponse, WordsItem } from "@ecosystem/api-interfaces";
+import { UpsertWordRequest, UpsertWordResponse, FindWordRequest,
+    FindWordResponse, FindWordsRequest, FindWordsResponse, WordsItem } from "@ecosystem/api-interfaces";
 import { Injectable } from "@nestjs/common";
 import { GeminiService } from "../gemeni/gemini.service";
 import { WordRepository } from "./word.repository";
@@ -29,14 +30,11 @@ export class WordService {
         languageCode: 'en',
         word: geminiResponse.word,
         translation: geminiResponse.translation,
-        meaning: geminiResponse.meaning,
         ipa: geminiResponse.ipa,
-        pronunciation: geminiResponse.pronunciation,
         level: geminiResponse.level,
-        partsOfSpeech: geminiResponse.partsOfSpeech,
-        category: geminiResponse.category,
-        examples: geminiResponse.examples,
-        related_words: geminiResponse.related_words,
+        partOfSpeech: geminiResponse.partOfSpeech,
+        usageNote: geminiResponse.usageNote,
+        definitions: geminiResponse.definitions,
         isExisted: existed
         };
     }
@@ -57,16 +55,13 @@ export class WordService {
         ])
 
         const data: WordsItem[] = rawData.map(item => ({
-            _id: item._id.toString(),
+            _id: item._id,
             word: item.word,
-            meaning: item.meaning,
+            translation: item.translation,
             ipa: item.ipa,
             level: item.level,
-            partsOfSpeech: item.partsOfSpeech,
-            translation: item.translation,
-            pronunciation: item.pronunciation || '',
-            category: item.category,
-            examples: item.examples || [],
+            partOfSpeech: item.partOfSpeech,
+            definitions: item.definitions || []
         }));        
         // Return the Word list
         return {
@@ -75,15 +70,15 @@ export class WordService {
         };
     } 
 
-    async create(vocab: CreateWordRequest): Promise<CreateWordResponse> {
+    async upsert(vocab: UpsertWordRequest): Promise<UpsertWordResponse> {
         // Create a new Word entry using the repository
-        const newWord = await this.repository.create(vocab);
+        const word = await this.repository.upsert(vocab);
         
         // Return the created Word entry
         return {
             success: true,
             message: 'Word created successfully',
-            data: {...newWord, _id: newWord._id.toString()},
+            data: word,
         };
     }
 
@@ -91,17 +86,15 @@ export class WordService {
         const word = await this.repository.findOne(params.id);
         return {
             data: word ? {
-                _id: word._id.toString(),
+                _id: word._id,
                 languageCode: word.languageCode,
                 word: word.word,
-                meaning: word.meaning,
+                translation: word.translation,
                 ipa: word.ipa,
                 level: word.level,
-                partsOfSpeech: word.partsOfSpeech,
-                translation: word.translation,
-                pronunciation: word.pronunciation,
-                category: word.category,
-                examples: word.examples || [],
+                partOfSpeech: word.partOfSpeech,
+                usageNote: word.usageNote,
+                definitions: word.definitions || [],
             } : null
         }
     }
@@ -111,17 +104,15 @@ export class WordService {
         const word = await this.repository.findByWord(value);
         return {
             data: word ? {
-                _id: word._id.toString(),
+                _id: word._id,
                 languageCode: word.languageCode,
                 word: word.word,
-                meaning: word.meaning,
+                translation: word.translation,
                 ipa: word.ipa,
                 level: word.level,
-                partsOfSpeech: word.partsOfSpeech,
-                translation: word.translation,
-                pronunciation: word.pronunciation,
-                category: word.category,
-                examples: word.examples || [],
+                partOfSpeech: word.partOfSpeech,
+                usageNote: word.usageNote,
+                definitions: word.definitions || [],
             } : null
         }
     }

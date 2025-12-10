@@ -1,4 +1,4 @@
-import { API_ROUTES, CreateWordRequest, CreateWordResponse, FindWordRequest, FindWordResponse, FindWordsRequest, FindWordsResponse } from "@ecosystem/api-interfaces";
+import { API_ROUTES, UpsertWordRequest, UpsertWordResponse, FindWordRequest, FindWordResponse, FindWordsRequest, FindWordsResponse } from "@ecosystem/api-interfaces";
 import { Body, Controller, Get, Post, Query, ServiceUnavailableException } from "@nestjs/common";
 import { WordService } from "./word.service";
 
@@ -27,7 +27,7 @@ export class WordController {
     }
 
     @Get(routers.FIND_ALL)
-    async getVocabularyList(@Query() req: FindWordsRequest): Promise<FindWordsResponse> {
+    async getWordList(@Query() req: FindWordsRequest): Promise<FindWordsResponse> {
         const obj = JSON.parse(JSON.stringify(req)); // req.body = [Object: null prototype] { title: 'product' }
         const {data, total} = await this.service.findAll(obj);
         // Return the vocabulary list
@@ -42,10 +42,9 @@ export class WordController {
         return this.service.findOne(req)
     }
 
-    @Post(routers.CREATE)
-    createVocabulary(@Body() body: CreateWordRequest): Promise<CreateWordResponse> {
-        // Call the service to create a new vocabulary entry
-        return this.service.create(body);
+    @Post(routers.UPSERT)
+    UpsertVocabulary(@Body() body: UpsertWordRequest): Promise<UpsertWordResponse> {
+        return this.service.upsert(body);
     }
 
   

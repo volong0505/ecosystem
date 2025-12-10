@@ -1,7 +1,7 @@
 <nz-drawer [nzClosable]="false" nzWidth="500px" nzPlacement="left" [nzKeyboard]="true" (nzOnClose)="store.closeDrawer()"
     [nzVisible]="store.drawer.isOpen()">
     <ng-container *nzDrawerContent>
-        <div>
+        <!-- <div>
             <nz-spin nzTip="Asking..." [nzSpinning]="isSpinning">
 
                 <form [formGroup]="askAIForm" (ngSubmit)="onAskAi()">
@@ -13,13 +13,13 @@
                     </nz-form-item>
                 </form>
             </nz-spin>
-        </div>
+        </div> -->
 
-     
+
 
         <div>
             <div class="form-container">
-                <form nz-form [formGroup]="validateForm" class="login-form">
+                <form nz-form [formGroup]="validateForm" class="login-form" >
                     <h5 nz-typography>Vocabulary</h5>
 
                     <nz-form-item>
@@ -30,20 +30,8 @@
 
                     <nz-form-item>
                         <nz-form-control>
-                            <input type="text" nz-input formControlName="translation" placeholder="Translation"
-                                nzVariant="underlined" /> </nz-form-control>
-                    </nz-form-item>
-
-                    <nz-form-item>
-                        <nz-form-control>
-                            <input type="text" nz-input formControlName="pronunciation" placeholder="Pronunciation"
-                                nzVariant="underlined" /> </nz-form-control>
-                    </nz-form-item>
-
-                    <nz-form-item>
-                        <nz-form-control>
-                            <textarea formControlName="meaning" nz-input rows="1" placeholder="Meaning"
-                                nzVariant="underlined"></textarea>
+                            <input nz-input formControlName="translation" nz-input placeholder="Translation"
+                                nzVariant="underlined" />
                         </nz-form-control>
                     </nz-form-item>
 
@@ -67,69 +55,76 @@
                         </nz-form-control>
 
                         <nz-form-control [nzSm]="12" [nzXs]="24">
-                            <nz-select nzMode="tags" class="select-right" formControlName="partsOfSpeech"
-                                nzVariant="underlined" nzPlaceHolder="Parts of Speech">
+                            <nz-select class="select-right" formControlName="partOfSpeech" nzVariant="underlined"
+                                nzPlaceHolder="Parts of Speech">
                                 @for( part of partsOfSpeechOptions; track part.value) {
                                 <nz-option [nzValue]="part.value" [nzLabel]="part.label"></nz-option>
                                 }
-
-                            </nz-select> 
+                            </nz-select>
                         </nz-form-control>
                     </nz-form-item>
 
-                     <nz-form-item>
-                        <nz-form-control [nzSm]="12" [nzXs]="24">
-                            <nz-select formControlName="category"
-                                nzVariant="underlined" nzPlaceHolder="Category">
-                                @for( category of categoryOptions(); track category) {
-                                <nz-option [nzValue]="category" [nzLabel]="category"></nz-option>
-                                }
-                            </nz-select> 
+                    <nz-form-item>
+                        <nz-form-control>
+                            <textarea formControlName="usageNote" nz-input rows="1" placeholder="Usage Note"
+                                nzVariant="underlined"></textarea>
                         </nz-form-control>
                     </nz-form-item>
-                </form>
-            </div>
+
+      </form>
 
 
-            <div class="sentence-container">
-                <h5 nz-typography>Example Senteces</h5>
 
-                <div>
-                    @for( s of examples; track s.id) {
-                    <div class="sentence-element">
-                        <div class="sentence-element-header">
-                            <span>Example {{s.id}}</span>
+                    <div class="definitions-container">
+                        <h5 nz-typography>Definitions</h5>
 
-                            <a class="sentence-element-delete" nz-button nzDanger (click)="removeSentece(s.id)"><nz-icon
-                                    nzType="delete" nzTheme="outline" /></a>
+                        <div>
+                            @for( s of definitions; track s.id) {
+                            <div class="definitions-element">
+                                <div class="definitions-element-header">
+                                    <span>{{s.id}}</span>
+
+                                    <a class="definitions-element-delete" nz-button nzDanger
+                                        (click)="removeDefinition(s.id)"><nz-icon nzType="delete"
+                                            nzTheme="outline" /></a>
+                                </div>
+                                <input class="definitions-input" type="text" nz-input placeholder="Definition"
+                                    [(ngModel)]="s.translation" nzVariant="underlined" />
+
+                                <input class="definitions-input" type="text" nz-input placeholder="Meaning"
+                                    nzVariant="underlined" [(ngModel)]="s.explanation" />
+
+                                <input class="definitions-input" type="text" nz-input placeholder="Note"
+                                    nzVariant="underlined" [(ngModel)]="s.note" />
+
+                                <input class="definitions-input" type="text" nz-input placeholder="Example"
+                                    nzVariant="underlined" [(ngModel)]="s.example" />
+
+                                <input class="definitions-input" type="text" nz-input placeholder="Dịch"
+                                    nzVariant="underlined" [(ngModel)]="s.exampleVi" />
+                            </div>
+                            }
                         </div>
-                        <input class="sentence-input" type="text" nz-input placeholder="Sentence"
-                            [(ngModel)]="s.sentence" nzVariant="underlined" />
-                        <input class="sentence-input" type="text" nz-input placeholder="Meaning" nzVariant="underlined"
-                            [(ngModel)]="s.meaning" />
-                        <input class="sentence-input" type="text" nz-input placeholder="Pronunciation"
-                            nzVariant="underlined" [(ngModel)]="s.pronunciation" />
+
+                        <div>
+                            <button nz-button nzType="dashed" class="add-button" (click)="addDefinition($event)">
+                                <nz-icon nzType="plus" />
+                                Add definition
+                            </button>
+                        </div>
                     </div>
-                    }
-                </div>
 
-                <div>
-                    <button nz-button nzType="dashed" class="add-button" (click)="addSentence($event)">
-                        <nz-icon nzType="plus" />
-                        Add Sentence
-                    </button>
-                </div>
-            </div>
-
-            <div>
-                <button nz-button nzType="primary" class="submit-button" (click)="submitForm()">
-                    <nz-icon nzType="save" />
-                    Save
-                </button>
+                    <div>
+                        <button nz-button nzType="primary" class="submit-button" (click)="submitForm()">
+                            <nz-icon nzType="save" />
+                            Save
+                        </button>
+                    </div>
+          
             </div>
         </div>
 
-    @if(isExisted.status) {
+        @if(isExisted.status) {
         <div class="alert">
             <nz-alert nzType="warning" nzMessage="This word already exists" nzShowIcon>
             </nz-alert>

@@ -55,7 +55,7 @@ export class VocabularyTrackerTableComponent {
   submitForm(): void {
     if (this.keyword !== this.searchForm.value.keyword) {
         this.keyword = this.searchForm.value.keyword || '';
-        this.store.loadVocabularyList({keyword: this.keyword, page: this.currentPage});
+        this.store.loadWordList({keyword: this.keyword, page: this.currentPage});
     }
   }
 
@@ -68,6 +68,10 @@ export class VocabularyTrackerTableComponent {
   }
 
   pageChange($event: any) {
-    this.store.loadVocabularyList({keyword: this.keyword, page: $event});
+    this.store.loadWordList({keyword: this.keyword, page: $event});
+  }
+
+  onEdit(id: string) {
+    this.store.onEdit(id)
   }
 }

@@ -1,8 +1,9 @@
+
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, Types } from 'mongoose';
+import { Model } from 'mongoose';
 import { Word } from '@ecosystem/infra-database';
-import { CreateWordRequest, FindWordsRequest } from '@ecosystem/api-interfaces';
+import { UpsertWordRequest, FindWordsRequest } from '@ecosystem/api-interfaces';
 
 @Injectable()
 export class WordRepository {
@@ -12,9 +13,10 @@ export class WordRepository {
     private readonly model: Model<Word>,
   ) {}
 
-  async create(vocab: Partial<CreateWordRequest>): Promise<Word> {
-    const _id = new Types.ObjectId()
-    return this.model.create({_id, ...vocab, creationDate: new Date});
+  async upsert(vocab: Partial<UpsertWordRequest>): Promise<any> {
+    const _id = vocab._id ? vocab._id : `${vocab.word}-${vocab.partOfSpeech}`.toLocaleLowerCase();
+    delete vocab._id;
+    return this.model.updateOne({_id: _id}, {$set: vocab, creationDate: new Date}, { upsert: true});
   }
 
   async findAllByLanguage(params: FindWordsRequest): Promise<Word[]> {
@@ -62,8 +64,7 @@ export class WordRepository {
     return query.exec()
   }
 
-  findOne(id: string): Promise<Word | null> {
-    const _id = new Types.ObjectId(id)
+  findOne(_id: string): Promise<Word | null> {
     return this.model.findById(_id).exec();
   }
 
@@ -87,4 +88,6 @@ export class WordRepository {
   async deleteById(id: string): Promise<void> {
     await this.model.findByIdAndDelete(id).exec();
   }
+
+
 }

@@ -10,7 +10,7 @@
   padding-left: .5em;
 }
 
-.sentence-input {
+.definitions-input {
     margin-bottom: 1em;
 }
 
@@ -19,7 +19,7 @@ button {
     width: 100%;
 }
 
-.sentence-element-delete {
+.definitions-element-delete {
     float: right;
 }
 
@@ -29,11 +29,11 @@ button {
     cursor: pointer
 }
 
-.sentence-container {
+.definitions-container {
     margin-top: 2em;
 }
 
-.sentence-element {
+.definitions-element {
     padding-left: .5em;
     padding-bottom: .5em;
 }

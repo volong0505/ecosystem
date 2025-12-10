@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
-import { API_ROUTES, CreateWordRequest, CreateWordResponse, FindWordResponse, FindWordsRequest, FindWordsResponse } from "@ecosystem/api-interfaces";
+import { API_ROUTES, UpsertWordRequest, UpsertWordResponse, FindWordResponse, FindWordsRequest, FindWordsResponse } from "@ecosystem/api-interfaces";
 import { Observable } from "rxjs";
 
 const apiRoutes = API_ROUTES.WORD;
@@ -16,7 +16,7 @@ export class DataAccessWordService {
     }
 
     // Example method to fetch vocabulary list
-    getVocabularyList(req: FindWordsRequest): Observable<FindWordsResponse> {
+    getWordList(req: FindWordsRequest): Observable<FindWordsResponse> {
         const { keyword = '', page = 1} = req;
 
         const params = new HttpParams()
@@ -32,8 +32,8 @@ export class DataAccessWordService {
     } 
 
     // Example method to add a new word
-    createVocabulary(dto: CreateWordRequest): Observable<CreateWordResponse> {
-        return this.http.post<CreateWordResponse>(apiRoutes.CREATE, dto)
+    upsertWord(dto: UpsertWordRequest): Observable<UpsertWordResponse> {
+        return this.http.post<UpsertWordResponse>(apiRoutes.UPSERT, dto)
         // Logic to add a new word to the vocabulary list
     }
 
