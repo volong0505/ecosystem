@@ -1,7 +1,9 @@
 import { inject } from '@angular/core';
-import { FindWordResponse, FindWordsRequest, WordDto, WordsItem } from '@ecosystem/api-interfaces';
+import { FindWordsRequest, WordDto, WordsItem } from '@ecosystem/api-interfaces';
+import { tapResponse } from '@ngrx/operators';
 import { patchState, signalStore, withHooks, withMethods, withState } from '@ngrx/signals';
-import { lastValueFrom } from 'rxjs';
+import { rxMethod } from '@ngrx/signals/rxjs-interop';
+import { debounceTime, distinctUntilChanged, lastValueFrom, pipe, switchMap, tap } from 'rxjs';
 import { DataAccessWordService } from './data-access-word.service';
 
 export interface WordStateModel {
@@ -48,11 +50,11 @@ export const DataAccessWordStore = signalStore(
        { providedIn: 'root' },
     withState(initialState),
     withMethods((store, service = inject(DataAccessWordService)) => ({
-        async loadVocabularyList(req: FindWordsRequest) {
+        async loadWordList(req: FindWordsRequest) {
             
             patchState(store, { list: {...store.list(), page: req.page || 1, isLoading: true} });
             try {
-                const res$ = service.getVocabularyList(req);
+                const res$ = service.getWordList(req);
                 const res = await lastValueFrom(res$);
                 patchState(store, { list: {...store.list(), data: res.data, total: res.total,isLoading: false}});
             } catch (error) {
@@ -76,16 +78,16 @@ export const DataAccessWordStore = signalStore(
                 patchState(store, { drawer: { ...store.drawer(), isLoading: false } });
             }
         },
-        async createVocabulary(request: any) {
+        async upsertWord(request: any) {
             patchState(store,  { drawer: { ...store.drawer(), isCreating: false } });
             try {
-                const res$ = service.createVocabulary(request);
+                const res$ = service.upsertWord(request);
                 await lastValueFrom(res$);
                 const params = {
                     keyword: request.keyword || '',
                     page: store.list.page(),
                 };
-                this.loadVocabularyList(params); // Reload vocabulary list after creation
+                this.loadWordList(params); // Reload vocabulary list after creation
                 this.closeDrawer();
             } catch (error) {
                 patchState(store, { drawer: { ...store.drawer(), isCreating: false } });
@@ -103,16 +105,33 @@ export const DataAccessWordStore = signalStore(
             patchState(store, { drawer: { ...store.drawer(), isOpen: true },  detail: { ...store.detail(), id } } );
             this.loadOne(id);
         },
-        async loadOne(id: string) {
-            const res$ = service.getOne(id);
-            const res: FindWordResponse  = await lastValueFrom(res$);
-            patchState(store, { detail: { ...store.detail(), isLoading: false, data: res.data as WordDto || null}});
-        },
+        // async loadOne(id: string) {
+        //     const res$ = service.getOne(id);
+        //     const res: FindWordResponse  = await lastValueFrom(res$);
+        //     patchState(store, { detail: { ...store.detail(), isLoading: false, data: res.data as WordDto || null}});
+        // },
+        loadOne: rxMethod<string>(
+            pipe(
+                debounceTime(300),
+                distinctUntilChanged(),
+                tap(() => patchState(store, { detail: {...store.detail(), isLoading: true}})),
+                switchMap((query) => {
+                    return service.getOne(query).pipe(
+                    tapResponse({
+                        next: (res) => patchState(store, { detail: { ...store.detail(), isLoading: false, data: res.data}}),
+                        error: (err) => {
+                            patchState(store, { detail: {...store.detail(), isLoading: false}})
+                        }
+                    }))
+                })
+
+            )
+        )
     })
     ),
     withHooks({
         onInit(store) {
-            store.loadVocabularyList({ keyword: '', page: store.list.page()}); // Load initial vocabulary list
+            store.loadWordList({ keyword: '', page: store.list.page()}); // Load initial vocabulary list
         }
     }
     )

@@ -10,13 +10,16 @@
       "dom",
       "es2017"
     ],
+    "strictPropertyInitialization": false,
+
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "typeCheckHostBindings": true,
-    "strictTemplates": true
+    "strictTemplates": true,
+
   },
   "files": [],
   "include": [],

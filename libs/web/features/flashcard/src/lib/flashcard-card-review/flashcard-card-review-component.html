@@ -7,9 +7,7 @@
             </div>
 
             <div class="tags">
-                @for (tag of store.flashcard.data().partsOfSpeech; track tag) {
-                <shared-ui-tag-component [tagText]="tag" />
-                }
+                <shared-ui-tag-component [tagText]="store.flashcard.data().partOfSpeech" />
             </div>
 
             <div class="check-button">
@@ -24,26 +22,31 @@
         </div>
 
         <div class="card-center">
-
-            <div class="meaning">
-                <span>{{store.flashcard.data().meaning}}</span>
-            </div>
-
             <div>
-                <input [(ngModel)]="value" [nzStatus]="status" (ngModelChange)="compare()" nz-input nzSize="large" />
+                <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="nextFlashcard()">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <input [(ngModel)]="value" [nzStatus]="status" (ngModelChange)="compare()" nz-input
+                                nzSize="large" [ngModelOptions]="{standalone: true}" />
+                        </nz-form-control>
+                    </nz-form-item>
+
+                </form>
             </div>
 
             @if(this.isCorrect() == true) {
             <div class="hide">
                 <div>
-                    <span>{{store.flashcard.data().pronunciation}}</span>
+                    <span>{{store.flashcard.data().ipa}}</span>
                 </div>
 
-                <div class="sentences">
-                    <div class="sentences-title"> Sentences: </div>
-                    @for(sentence of store.flashcard.data().examples; track sentence) {
+                <div class="definition">
+                    <div class="definition-title"> Definitons: </div>
+                    @for(def of store.flashcard.data().definitions; track def) {
                     <div>
-                        <div class="sentence">{{sentence.sentence}} ({{sentence.meaning}})</div>
+                        <div class="definition-translation">{{def.translation}}</div>
+                        <div class="definition-example">{{def.example}}</div>
+
                     </div>
                     }
 

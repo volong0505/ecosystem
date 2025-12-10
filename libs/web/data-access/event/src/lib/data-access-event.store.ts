@@ -55,7 +55,6 @@ export const DataAccessEventStore = signalStore(
                 this.loadEvents(null);
                 patchState(store, { isSaving: false, detailVisible: false});
 
-                // console.log(store.detailVisible())
             } catch (e) {
                 // patchState(store, { isSaving: false});
             }                

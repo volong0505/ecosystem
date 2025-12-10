@@ -1,27 +1,34 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
+import { Document } from 'mongoose';
 
 export type WordDocument = Word & Document;
 
 @Schema({ _id: false })
-export class Example {
-
-  @Prop({ required: true })
-  sentence!: string;
+export class Definition {
 
   @Prop()
-  pronunciation?: string;
+  translation!: string;
 
   @Prop()
-  meaning!: string;
+  explanation?: string;
+
+  @Prop()
+  example!: string;
+
+  @Prop()
+  exampleVi!: string
+
+  @Prop()
+  note!: string;
+
 }
 
-const ExampleSchema = SchemaFactory.createForClass(Example);
+const DefinitionSchema = SchemaFactory.createForClass(Definition);
 
 @Schema({ timestamps: true })
 export class Word {
   @Prop({ required: true })
-  _id!: Types.ObjectId;
+  _id!: string
 
   @Prop({ required: true })
   languageCode!: string; // ISO code like 'en', 'jp'
@@ -29,29 +36,23 @@ export class Word {
   @Prop({ required: true })
   word!: string;
 
-  @Prop({ required: true })
-  translation!: string;
-
   @Prop()
-  meaning!: string;
+  translation!: string;
 
   @Prop()
   ipa!: string
 
   @Prop()
-  pronunciation?: string;
+  level!: string;
 
   @Prop()
-  level?: string;
+  partOfSpeech!: string;
 
   @Prop()
-  partsOfSpeech?: string[];
-  
-  @Prop()
-  category?: string;
+  usageNote!: string;
 
-  @Prop({ type: [ExampleSchema], default: [] })
-  examples!: Example[];
+  @Prop({ type: [DefinitionSchema], default: [] })
+  definitions!: Definition[]
 
   @Prop()
   creationDate?: Date;

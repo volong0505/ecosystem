@@ -24,11 +24,11 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 export class FlashcardCardStudyComponent {
   public readonly store = inject(DataAccessFlashcardStore);
 
-  id: string | null = null;
+  _id: string | null = null;
 
   nextFlashcard() {
     const req = {
-      id: this.store.flashcard.data().id
+      _id: this.store.flashcard.data()._id
     }
     this.store.loadFlashcardOfTheDay(req);
   }

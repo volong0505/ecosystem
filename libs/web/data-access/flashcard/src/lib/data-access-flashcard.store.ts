@@ -6,7 +6,7 @@ import { DataAccessFlashcardService } from "./data-access-flashcard.service";
 
 export interface FlashcardStateModel {
       flashcard: {
-            id?: string | null;
+            _id?: string | null;
             data: FlashcardDto;
             isLoading?: boolean;
         }
@@ -14,7 +14,7 @@ export interface FlashcardStateModel {
 
 const initialState: FlashcardStateModel = {
     flashcard: { 
-        id: null,
+        _id: null,
         data: {} as FlashcardDto,
         isLoading: false
     }
@@ -25,7 +25,7 @@ export const DataAccessFlashcardStore = signalStore(
         withState(initialState),
         withMethods((store, service = inject(DataAccessFlashcardService)) => ({
               async loadFlashcardOfTheDay(req: FlashcardRequest) {
-                        patchState(store, { flashcard: { ...store.flashcard(), isLoading: true, id: req.id } } );
+                        patchState(store, { flashcard: { ...store.flashcard(), isLoading: true, _id: req._id } } );
                         try {
                             const res$ = service.flashcardOfTheDay(req);
                             const res: FlashcardResponse  = await lastValueFrom(res$);

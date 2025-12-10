@@ -10,8 +10,7 @@ export const API_ROUTES = {
     WORD: {
         FIND_ALL: 'word/find-all',
         FIND_ONE: 'word/find-one',
-        CREATE: 'word/create',
-        UPDATE: 'word/update',
+        UPSERT: 'word/upsert',
         DELETE: 'word/delete',   
         GENERATE_BY_AI: 'word/generate-by-ai',
         FLASHCARD: 'word/flashcard',

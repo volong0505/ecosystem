@@ -1,21 +1,19 @@
-import { WordSentence } from "./word.dto";
+import { Definition } from "./word.dto";
 
 export class FlashcardRequest {
-    id?: string;
+    _id?: string;
     neededHelp?: boolean
 }
 
 export class FlashcardDto {
-    id!: string;
+    _id!: string;
     word!: string;
     translation!: string;
-    meaning!: string;
     ipa!: string
-    pronunciation?: string;
     level?: string;
-    partsOfSpeech?: string[];
-    category?: string;
-    examples!: WordSentence[];
+    usageNote?: string;
+    partOfSpeech: string;
+    definitions!: Definition[]; 
     alreadyLearned!: boolean;
 }
 

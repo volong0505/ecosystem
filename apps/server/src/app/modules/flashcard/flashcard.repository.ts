@@ -1,7 +1,7 @@
 import { Word } from "@ecosystem/infra-database";
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Model, Types } from "mongoose";
+import { Model } from "mongoose";
 
 @Injectable()
 export class FlashcardRepository {
@@ -11,12 +11,11 @@ export class FlashcardRepository {
         private readonly model: Model<Word>,
     ) { }
 
-    async update(id: Types.ObjectId, reviewedAt: Date, repetition: number, nextReviewDate: Date): Promise<Word | null> {
-        return await this.model.findByIdAndUpdate(new Types.ObjectId(id), { reviewedAt, repetition, nextReviewDate }).exec();
+    async update(_id: string, reviewedAt: Date, repetition: number, nextReviewDate: Date): Promise<Word | null> {
+        return await this.model.findByIdAndUpdate(_id, { reviewedAt, repetition, nextReviewDate }).exec();
     }
 
-    findOne(id: string): Promise<Word | null> {
-        const _id = new Types.ObjectId(id)
+    findOne(_id: string): Promise<Word | null> {
         return this.model.findById(_id).exec();
     }
 

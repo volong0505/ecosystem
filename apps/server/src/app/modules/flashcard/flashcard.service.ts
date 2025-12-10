@@ -10,23 +10,21 @@ export class FlashcardService {
     ) {}
 
     async flashcard(params: FlashcardRequest): Promise<FlashcardResponse> {
-            if (params.id) {
+            if (params._id) {
                 await this.updateFlashcard(params);
             }
             const word = await this.repository.getWordToReview();
 
             return {
                 data: word ? {
-                    id: word._id.toString(),
+                    _id: word._id,
                     word: word.word,
                     translation: word.translation,
-                    meaning: word.meaning,
                     ipa: word.ipa,
-                    pronunciation: word.pronunciation,
                     level: word.level,
-                    partsOfSpeech: word.partsOfSpeech,
-                    category: word.category,
-                    examples: word.examples || [],
+                    partOfSpeech: word.partOfSpeech,
+                    usageNote: word.usageNote,
+                    definitions: word.definitions || [],
                     alreadyLearned: word.repetition >= 1
                 } : {} as FlashcardDto
             }
@@ -34,9 +32,9 @@ export class FlashcardService {
 
     async updateFlashcard(params: FlashcardRequest) {
         
-        const { id, neededHelp} = params;
+        const { _id, neededHelp} = params;
         const reviewedAt = new Date()
-        const word = await this.repository.findOne(id as string);
+        const word = await this.repository.findOne(_id as string);
         if (!word)
             return;
 

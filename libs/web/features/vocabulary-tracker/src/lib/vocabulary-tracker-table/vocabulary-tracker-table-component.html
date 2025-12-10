@@ -36,11 +36,7 @@
         </div>
       </div>
     </div>
-
-
   </div>
-
-
 
   <nz-table [nzData]="store.list.data()" [nzShowPagination]="false" #nzTable nzTableLayout="fixed">
     <thead>
@@ -48,11 +44,9 @@
         <th nzWidth="2%"></th>
         <th nzWidth="8%">Word</th>
         <th nzWidth="12%">Translation</th>
-        <th nzWidth="12%">Pronunciation</th>
-        <th nzWidth="20%">Meaning</th>
+        <th nzWidth="12%">IPA</th>
         <th nzWidth="5%">Level</th>
-        <th nzWidth="10%">Parts Of Speech</th>
-        <th nzWidth="12%">Category</th>
+        <th nzWidth="10%">Part Of Speech</th>
         <th nzWidth="5%"></th>
       </tr>
     </thead>
@@ -62,44 +56,24 @@
         <td [nzExpand]="expandSet.has(data._id)" (nzExpandChange)="onExpandChange(data._id, $event)"></td>
         <td>{{ data.word }}</td>
         <td>{{ data.translation }}</td>
-
         <td>
-          <span>
-            {{ data.ipa}}
-          </span><br>
-          <span>{{ data.pronunciation }}</span>
+          {{ data.ipa}}
         </td>
-
-        <td>{{data.meaning}}</td>
 
         <td>{{ data.level}}</td>
         <td>
-          @for (p of data.partsOfSpeech; track p) {
           <nz-tag>
-            {{ p}}
+            {{ data.partOfSpeech}}
           </nz-tag>
-          }
         </td>
-        <td>
-       <nz-tag>{{data.category}}</nz-tag>
-        </td>
+
         <td class="action">
-          <a (click)="store.onEdit(data._id)"><nz-icon nzType="edit" nzTheme="outline" /></a>
+          <a (click)="onEdit(data._id)"><nz-icon nzType="edit" nzTheme="outline" /></a>
           <nz-divider nzType="vertical"></nz-divider>
           <a>
             <nz-icon nzType="delete" nzTheme="outline" />
           </a>
         </td>
-      </tr>
-      <tr [nzExpand]="expandSet.has(data._id)">
-
-        @for (s of data.examples; track s) {
-        <div class="example-container">
-          <span class="sentence">- {{s.sentence}}</span> <span> - {{s.meaning}}</span> <br>
-          <span> <span nz-icon nzType="sound"></span>
-            {{s.pronunciation}}</span> <br>
-        </div>
-        }
       </tr>
       }
     </tbody>

@@ -7,9 +7,8 @@
             </div>
 
             <div class="tags">
-                @for (tag of store.flashcard.data().partsOfSpeech; track tag) {
-                <shared-ui-tag-component [tagText]="tag" />
-                }
+                <shared-ui-tag-component [tagText]="store.flashcard.data().partOfSpeech" />
+                
             </div>
 
             <div class="check-button">
@@ -25,7 +24,7 @@
         <div class="card-center">
 
             <div class="meaning">
-                <span>{{store.flashcard().data.meaning}}</span>
+                <span>{{store.flashcard().data.translation}}</span>
             </div>
 
             <div class="word">

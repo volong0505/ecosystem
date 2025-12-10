@@ -9,11 +9,10 @@ const apiRoutes = API_ROUTES.FLASHCARD;
 export class DataAccessFlashcardService { 
 
     private readonly http = inject(HttpClient);
-
-
+    
      flashcardOfTheDay(req: FlashcardRequest): Observable<FlashcardResponse> {
         const params = new HttpParams()
-            .set('id', req.id || '')
+            .set('_id', req._id || '')
             .set('neededHelp', req.neededHelp || false)
         return this.http.get<FlashcardResponse>(apiRoutes.GET_FLASHCARD, {params: params});
     }

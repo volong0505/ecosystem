@@ -1,8 +1,10 @@
 
-export class WordSentence {
-  sentence!: string;
-  pronunciation?: string;
-  meaning!: string;
+export class Definition {
+  translation!: string;
+  explanation?: string;
+  example!: string;
+  exampleVi!: string;
+  note!: string;
 }
 
 export class WordDto {
@@ -10,13 +12,11 @@ export class WordDto {
   languageCode!: string; // ISO code like 'en', 'jp'
   word!: string;
   translation!: string;
-  meaning!: string;
   ipa!: string
-  pronunciation?: string;
-  level?: string;
-  partsOfSpeech?: string[];
-  category?: string;
-  examples!: WordSentence[];
+  level!: string;
+  partOfSpeech!: string;
+  usageNote!: string;
+  definitions!: Definition[]
   creationDate?: Date;
   reviewedAt?: Date;
 
